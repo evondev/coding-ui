@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-900 font-primary text-white pb-10 font-light;
+  }
+}
+@layer utilities {
+  .bg-gradient-primary {
+    background-image: linear-gradient(245deg, #fcb564, #ff65f2);
+  }
+}
