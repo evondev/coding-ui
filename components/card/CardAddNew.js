@@ -1,16 +1,14 @@
-import Banner from "components/Banner";
+import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Textarea from "components/textarea/Textarea";
-import { db } from "components/firebase/firebase-config";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import React from "react";
 import { toast } from "react-toastify";
-import Head from "next/head";
 
-const AddNewCardPage = () => {
+const CardAddNew = () => {
   const [values, setValues] = React.useState({
     title: "",
     filter: "",
@@ -33,12 +31,8 @@ const AddNewCardPage = () => {
   const { onChange } = useInputChange(values, setValues);
   return (
     <div>
-      <Head>
-        <title>CodingUI - Add new Card UI</title>
-      </Head>
-      <Banner></Banner>
       <form
-        className="max-w-3xl p-10 mx-auto bg-slate-800"
+        className="max-w-3xl p-10 mx-auto"
         onSubmit={handleAddNewCard}
         autoComplete="off"
       >
@@ -83,7 +77,21 @@ const AddNewCardPage = () => {
             type="submit"
             className="inline-flex items-center justify-center px-8 py-4 font-sans font-semibold tracking-wide text-white bg-blue-500 rounded-lg h-[60px]"
           >
-            Add new card
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            <span>Add new card</span>
           </button>
         </div>
       </form>
@@ -91,4 +99,4 @@ const AddNewCardPage = () => {
   );
 };
 
-export default AddNewCardPage;
+export default CardAddNew;

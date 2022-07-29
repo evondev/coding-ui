@@ -18,7 +18,9 @@ const Banner = () => {
       </h1>
       <div className="flex items-center justify-center gap-x-5">
         <a
-          href="#"
+          href="https://github.com/evondev/coding-ui"
+          target="_blank"
+          rel="noreferrer"
           className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-slate-800 rounded-lg h-[60px] w-[230px]"
         >
           <svg
