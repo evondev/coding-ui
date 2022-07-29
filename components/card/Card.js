@@ -35,10 +35,10 @@ const Card = (props) => {
     <>
       <div
         data-filter={filter}
-        className="relative flex flex-col p-5 border rounded border-slate-800 card"
+        className="relative flex flex-col p-5 border rounded border-slate-200 dark:border-slate-800 card"
       >
         <button
-          className="absolute flex items-center justify-center w-10 h-10 p-2 bg-black rounded-full bg-opacity-40 right-2 top-2 text-slate-400"
+          className="absolute flex items-center justify-center w-10 h-10 p-2 rounded-full dark:bg-black bg-opacity-40 right-2 top-2 dark:text-slate-400 text-slate-900 bg-slate-400"
           onClick={handleViewCode}
         >
           <svg
@@ -60,7 +60,9 @@ const Card = (props) => {
           </CardStyles>
         </div>
         <div className="flex items-center justify-between mt-auto card-footer gap-x-2">
-          <h3 className="text-sm font-semibold card-title">{title}</h3>
+          <h3 className="text-sm font-semibold card-title text-slate-900 dark:text-white">
+            {title}
+          </h3>
           <div
             className="flex items-center gap-x-2"
             aria-label="button-combination"
@@ -111,7 +113,7 @@ function ButtonCopy({ children, onClick = () => {}, type = "html" }) {
 
   return (
     <button
-      className={`inline-flex items-center gap-x-2 py-2 px-3 hover:text-white text-slate-500 rounded-lg transition-all text-sm ${bgClassName}`}
+      className={`inline-flex items-center gap-x-2 py-2 px-3 hover:text-white text-slate-500 rounded-lg transition-all text-sm font-medium ${bgClassName}`}
       onClick={onClick}
     >
       <svg

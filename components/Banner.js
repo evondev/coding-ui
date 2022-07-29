@@ -13,7 +13,7 @@ const Banner = () => {
           />
         </a>
       </Link>
-      <h1 className="max-w-3xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center">
+      <h1 className="max-w-3xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center text-slate-900 dark:text-white">
         Get your free UI components with just single click 👇
       </h1>
       <div className="flex items-center justify-center gap-x-5">

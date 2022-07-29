@@ -15,7 +15,7 @@ const FilterMenu = () => {
   };
   return (
     <div
-      className="flex mb-10 overflow-x-auto text-lg font-medium border-b gap-x-5 whitespace-nowrap border-b-slate-800"
+      className="flex mb-10 overflow-x-auto text-lg font-medium border-b gap-x-5 whitespace-nowrap border-slate-200 dark:border-b-slate-800"
       aria-label="tab-v4"
     >
       {filterItems.map((item) => (
@@ -24,7 +24,7 @@ const FilterMenu = () => {
           className={`flex items-center py-3 font-medium cursor-pointer gap-x-2 ${
             activeCard === item
               ? "text-blue-500 border-b-2 border-blue-500 pointer-events-none"
-              : "text-slate-300"
+              : "text-slate-900 dark:text-slate-300"
           }`}
           onClick={() => handleFilterCard(item)}
         >

@@ -4,7 +4,7 @@ const ToggleDarkMode = (props) => {
   const { on = true, onClick, ...rest } = props;
   return (
     <label className="flex items-center cursor-pointer select-none gap-x-3">
-      <div className="flex items-center justify-center rounded-full cursor-pointer w-14 h-14 bg-slate-800 gap-x-3">
+      <div className="flex items-center justify-center text-white rounded-full cursor-pointer w-14 h-14 bg-slate-800 gap-x-3">
         <input
           type="checkbox"
           checked={on}
@@ -44,7 +44,9 @@ const ToggleDarkMode = (props) => {
           </svg>
         )}
       </div>
-      {on ? "DarkMode" : "LightMode"}
+      <span className="text-slate-900 dark:text-white">
+        {on ? "DarkMode" : "LightMode"}
+      </span>
     </label>
   );
 };

@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div
       aria-label="sidebar"
-      className="relative p-5 border-r border-slate-800"
+      className="relative p-5 border-r border-slate-200 dark:border-slate-800"
     >
       <Link href="/">
         <a className="flex items-center justify-start mb-20 text-lg gap-x-5">
@@ -21,7 +21,7 @@ const Sidebar = () => {
         {menus.map((menu, index) => (
           <li key={menu.title}>
             <Link href={menu.link}>
-              <a className="flex items-center px-4 py-3 rounded-lg gap-x-3 hover:bg-blue-500">
+              <a className="flex items-center px-4 py-3 rounded-lg gap-x-3 hover:bg-blue-500 hover:text-white">
                 <span>{menu.icon}</span>
                 <span>{menu.title}</span>
               </a>
