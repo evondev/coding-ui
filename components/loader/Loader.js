@@ -80,3 +80,89 @@ export const LoadingBar = () => {
     ></Card>
   );
 };
+export const LoadingCircleDashed = () => {
+  return (
+    <Card
+      filter="Loading"
+      title="Loading Circle Dashed"
+      htmlCode={/*html*/ /*html*/ `<div class="dashed-loading"></div>`}
+      cssCode={
+        /*css*/ /*css*/ `
+        .dashed-loading {
+            position: relative;
+            height: 50px;
+          }
+          .dashed-loading:after,
+          .dashed-loading:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+          }
+          .dashed-loading:before {
+            z-index: 5;
+            border: 3px dashed #f62682;
+            border-left: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            -webkit-animation: dashed 1s linear infinite;
+            animation: dashed 1s linear infinite;
+          }
+          .dashed-loading:after {
+            z-index: 10;
+            border: 3px solid #f62682;
+            border-left: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            -webkit-animation: dashed 1s ease infinite;
+            animation: dashed 1s ease infinite;
+          }
+          @keyframes dashed {
+            to {
+              transform: rotate(360deg);
+            }
+          }
+      `
+      }
+    ></Card>
+  );
+};
+export const LoadingFade = () => {
+  return (
+    <Card
+      filter="Loading"
+      title="Loading Fade"
+      htmlCode={/*html*/ /*html*/ `<div class="fade-loading"></div>`}
+      cssCode={
+        /*css*/ /*css*/ `
+        .fade-loading {
+            width: 4rem;
+            height: 4rem;
+            background-color: #f62682;
+            border-radius: 5rem;
+            margin: 2rem auto;
+            position: relative;
+          }
+          .fade-loading:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background-color: inherit;
+            animation: fade 1s forwards infinite linear;
+          }
+          @keyframes fade {
+            to {
+              transform: scale(2);
+              opacity: 0;
+            }
+          }
+      `
+      }
+    ></Card>
+  );
+};

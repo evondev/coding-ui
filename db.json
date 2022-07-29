@@ -1,0 +1,10 @@
+{
+  "cards": [
+    {
+      "title": "Loading circle",
+      "filter": "Loading",
+      "htmlCode": "<div class=\"loading-circle\"></div>",
+      "cssCode": ""
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import Banner from "components/Banner";
 import CardList from "components/card/CardList";
 import FilterMenu from "components/filter/Filter";
+import useFetchCards from "hooks/useFetchCards";
 import Head from "next/head";
 
 export default function Home() {
