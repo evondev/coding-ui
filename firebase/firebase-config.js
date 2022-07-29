@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: process.env.FB_API_KEY,
-  authDomain: process.env.FB_AUTH_DOMAIN,
-  projectId: process.env.FB_PROJECT_ID,
-  storageBucket: process.env.FB_STORAGE_BUCKET,
-  messagingSenderId: process.env.SENDER_ID,
-  appId: process.env.FB_APP_ID,
+  apiKey: "AIzaSyDez1vRc55klAJpMg_94VQ32UCn2brnt5k",
+  authDomain: "coding-ui-3c8af.firebaseapp.com",
+  projectId: "coding-ui-3c8af",
+  storageBucket: "coding-ui-3c8af.appspot.com",
+  messagingSenderId: "383245459906",
+  appId: "1:383245459906:web:29604aef5f54935b88f65b",
 };
 
 // Initialize Firebase
