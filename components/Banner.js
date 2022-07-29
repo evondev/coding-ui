@@ -1,13 +1,18 @@
+import Link from "next/link";
 import React from "react";
 
 const Banner = () => {
   return (
     <div className="py-20">
-      <img
-        src="/logo.png"
-        alt="coding-ui"
-        className="mx-auto max-w-[100px] mb-5"
-      />
+      <Link href="/">
+        <a className="block">
+          <img
+            src="/logo.png"
+            alt="coding-ui"
+            className="mx-auto max-w-[100px] mb-5"
+          />
+        </a>
+      </Link>
       <h1 className="max-w-3xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center">
         Get your free UI components with just single click 👇
       </h1>
