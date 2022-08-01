@@ -4,7 +4,6 @@ import Card from "./Card";
 
 const CardList = () => {
   const { cards } = useFetchCards();
-  console.log("CardList ~ cards", cards);
   if (cards.length <= 0) return null;
   return (
     <div

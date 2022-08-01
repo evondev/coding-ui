@@ -3,6 +3,7 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Textarea from "components/textarea/Textarea";
+import { filterItems } from "constant/global-constant";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import React from "react";
@@ -15,8 +16,20 @@ const CardAddNew = () => {
     htmlCode: "",
     cssCode: "",
   });
+  const isValidFilter = (filter) => {
+    return filterItems.includes(filter);
+  };
   const handleAddNewCard = (e) => {
     e.preventDefault();
+    if (!isValidFilter(values.filter)) {
+      toast.error("Invalid filter");
+      return;
+    }
+    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    if (!isAllInputFilled) {
+      toast.error("Please fill all inputs");
+      return;
+    }
     const colRef = collection(db, "cards");
     try {
       addDoc(colRef, {
@@ -44,6 +57,7 @@ const CardAddNew = () => {
               type="text"
               placeholder="Enter the title"
               onChange={onChange}
+              required
             />
           </FormGroup>
           <FormGroup>
@@ -53,6 +67,7 @@ const CardAddNew = () => {
               name="filter"
               placeholder="Enter the filter"
               onChange={onChange}
+              required
             />
           </FormGroup>
         </div>
@@ -62,6 +77,7 @@ const CardAddNew = () => {
             name="htmlCode"
             placeholder="Enter your HTML code here..."
             onChange={onChange}
+            required
           ></Textarea>
         </FormGroup>
         <FormGroup>
@@ -70,6 +86,7 @@ const CardAddNew = () => {
             name="cssCode"
             placeholder="Enter your CSS code here..."
             onChange={onChange}
+            required
           ></Textarea>
         </FormGroup>
         <div className="mt-10 text-center">

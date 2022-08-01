@@ -10,7 +10,8 @@ export default function useFetchCards() {
       onSnapshot(colRef, (querySnapshot) => {
         const results = [];
         querySnapshot.forEach((doc) => {
-          results.push({ id: doc.id, ...doc.data() });
+          doc.data().title !== "" &&
+            results.push({ id: doc.id, ...doc.data() });
         });
         setCards(results);
       });

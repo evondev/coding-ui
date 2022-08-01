@@ -1,18 +1,24 @@
 import React from "react";
+import PropTypes from "prop-types";
+import useDarkMode from "hooks/useDarkMode";
 
 const ToggleDarkMode = (props) => {
-  const { on = true, onClick, ...rest } = props;
+  const [darkMode, setDarkMode] = useDarkMode();
   return (
     <label className="flex items-center cursor-pointer select-none gap-x-3">
-      <div className="flex items-center justify-center text-white rounded-full cursor-pointer w-14 h-14 bg-slate-800 gap-x-3">
+      <div
+        className={`flex items-center justify-center rounded-full cursor-pointer w-14 h-14 gap-x-3 ${
+          darkMode ? "bg-slate-800 text-white" : "bg-white text-yellow-500"
+        }`}
+      >
         <input
           type="checkbox"
-          checked={on}
+          checked={darkMode}
           className="hidden"
           onChange={() => {}}
-          onClick={onClick}
+          onClick={() => setDarkMode(!darkMode)}
         />
-        {on ? (
+        {darkMode ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6"
@@ -45,13 +51,12 @@ const ToggleDarkMode = (props) => {
         )}
       </div>
       <span className="text-slate-900 dark:text-white">
-        {on ? "DarkMode" : "LightMode"}
+        {darkMode ? "DarkMode" : "LightMode"}
       </span>
     </label>
   );
 };
 
-import PropTypes from "prop-types";
 ToggleDarkMode.propTypes = {
   on: PropTypes.bool.isRequired,
   onClick: PropTypes.func,

@@ -12,4 +12,11 @@
   .bg-gradient-primary {
     background-image: linear-gradient(245deg, #fcb564, #ff65f2);
   }
+  .hidden-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hidden-scroll::-webkit-scrollbar {
+    display: none;
+  }
 }

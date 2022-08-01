@@ -22,7 +22,7 @@ const Sidebar = () => {
           <li key={menu.title}>
             <Link href={menu.link}>
               <a className="flex items-center px-4 py-3 rounded-lg gap-x-3 hover:bg-blue-500 hover:text-white">
-                <span>{menu.icon}</span>
+                <span className="w-5">{menu.icon}</span>
                 <span>{menu.title}</span>
               </a>
             </Link>
