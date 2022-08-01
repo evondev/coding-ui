@@ -38,6 +38,13 @@ const CardAddNew = () => {
       });
     } catch (err) {
       toast.error(err.message);
+    } finally {
+      setValues({
+        title: "",
+        filter: "",
+        htmlCode: "",
+        cssCode: "",
+      });
     }
     toast.success("Card added successfully");
   };

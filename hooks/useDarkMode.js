@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import useLocalStorage from "./useLocalStorage";
-import useMedia from "./useMedia";
 
 export default function useDarkMode() {
   const [enabledState, setEnabledState] = useLocalStorage("dark-mode-enabled");
-  const enabled = typeof enabledState !== "undefined" && enabledState;
+  const enabled = enabledState;
   useEffect(() => {
     const className = "dark";
     const element = document.documentElement;

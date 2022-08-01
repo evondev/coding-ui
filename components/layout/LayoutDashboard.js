@@ -1,8 +1,17 @@
+import { useAuth } from "contexts/auth-context";
 import Head from "next/head";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 const LayoutDashboard = ({ children, heading = "" }) => {
+  const { userInfo } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (!userInfo?.email) router.push("/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo]);
+  if (!userInfo?.email) return null;
   return (
     <div className="min-h-screen grid grid-cols-[300px,minmax(0,1fr)]">
       <Head>
