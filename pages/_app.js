@@ -11,7 +11,7 @@ Modal.defaultStyles = {
 };
 
 function MyApp({ Component, pageProps }) {
-  useDarkMode();
+  // useDarkMode();
   return (
     <AuthProvider>
       <Component {...pageProps} />

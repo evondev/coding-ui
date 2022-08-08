@@ -1,5 +1,5 @@
 import Banner from "components/Banner";
-import Button from "components/button";
+import Button from "components/button/Button";
 import { auth } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";

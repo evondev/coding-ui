@@ -3,7 +3,7 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Textarea from "components/textarea/Textarea";
-import { filterItems } from "constant/global-constant";
+import { cardStatus, filterItems } from "constant/global-constant";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import React from "react";
@@ -15,6 +15,7 @@ const CardAddNew = () => {
     filter: "",
     htmlCode: "",
     cssCode: "",
+    status: cardStatus.APPROVED,
   });
   const isValidFilter = (filter) => {
     return filterItems.includes(filter);
@@ -65,6 +66,7 @@ const CardAddNew = () => {
               placeholder="Enter the title"
               onChange={onChange}
               required
+              value={values.title}
             />
           </FormGroup>
           <FormGroup>
@@ -75,6 +77,7 @@ const CardAddNew = () => {
               placeholder="Enter the filter"
               onChange={onChange}
               required
+              value={values.filter}
             />
           </FormGroup>
         </div>
@@ -85,6 +88,7 @@ const CardAddNew = () => {
             placeholder="Enter your HTML code here..."
             onChange={onChange}
             required
+            value={values.htmlCode}
           ></Textarea>
         </FormGroup>
         <FormGroup>
@@ -94,6 +98,7 @@ const CardAddNew = () => {
             placeholder="Enter your CSS code here..."
             onChange={onChange}
             required
+            value={values.cssCode}
           ></Textarea>
         </FormGroup>
         <div className="mt-10 text-center">

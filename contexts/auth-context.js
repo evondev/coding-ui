@@ -5,7 +5,9 @@ const { createContext, useContext, useState, useEffect } = require("react");
 
 const AuthContext = createContext();
 function AuthProvider(props) {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+  });
   const value = { userInfo, setUserInfo };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

@@ -95,3 +95,7 @@ export const menus = [
     link: "/manage/settings",
   },
 ];
+export const cardStatus = {
+  APPROVED: 1,
+  REJECTED: 2,
+};

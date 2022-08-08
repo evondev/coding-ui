@@ -30,10 +30,10 @@ const Sidebar = () => {
         ))}
       </ul>
       <div className="absolute bottom-0 flex items-center w-full pb-5 gap-x-2">
-        <ToggleDarkMode
+        {/* <ToggleDarkMode
           on={isDarkMode}
           onClick={() => setIsDarkMode(!isDarkMode)}
-        ></ToggleDarkMode>
+        ></ToggleDarkMode> */}
       </div>
     </div>
   );

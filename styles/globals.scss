@@ -6,6 +6,7 @@
 @layer base {
   :root {
     --blue: #2cccff;
+    --primary: var(--blue);
     --pink: #f62682;
   }
   body {
@@ -22,5 +23,15 @@
   }
   .hidden-scroll::-webkit-scrollbar {
     display: none;
+  }
+}
+.table {
+  @apply w-full;
+  th,
+  td {
+    @apply p-3 text-left;
+  }
+  th {
+    @apply text-slate-400;
   }
 }
