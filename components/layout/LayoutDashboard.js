@@ -1,6 +1,7 @@
 import { useAuth } from "contexts/auth-context";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import PageNotFound from "pages/404";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
@@ -11,7 +12,7 @@ const LayoutDashboard = ({ children, heading = "" }) => {
   //   if (!userInfo?.email) router.push("/login");
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [userInfo]);
-  // if (!userInfo?.email) return null;
+  if (!userInfo?.email) return <PageNotFound></PageNotFound>;
   return (
     <div className="min-h-screen grid grid-cols-[300px,minmax(0,1fr)]">
       <Head>

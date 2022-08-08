@@ -1,31 +1,32 @@
+import Dropdown from "components/dropdown/Dropdown";
 import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Textarea from "components/textarea/Textarea";
-import { cardStatus, filterItems } from "constant/global-constant";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { cardStatus } from "constant/global-constant";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  serverTimestamp,
+} from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
-import React from "react";
+import useToggle from "hooks/useToggle";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const CardAddNew = () => {
-  const [values, setValues] = React.useState({
+  const [filterList, setFilterList] = useState([]);
+  const [values, setValues] = useState({
     title: "",
     filter: "",
     htmlCode: "",
     cssCode: "",
     status: cardStatus.APPROVED,
   });
-  const isValidFilter = (filter) => {
-    return filterItems.includes(filter);
-  };
   const handleAddNewCard = (e) => {
     e.preventDefault();
-    if (!isValidFilter(values.filter)) {
-      toast.error("Invalid filter");
-      return;
-    }
     const isAllInputFilled = Object.values(values).every((item) => item !== "");
     if (!isAllInputFilled) {
       toast.error("Please fill all inputs");
@@ -49,7 +50,24 @@ const CardAddNew = () => {
     }
     toast.success("Card added successfully");
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const colRef = collection(db, "filters");
+      const snapshot = await getDocs(colRef);
+      const data = snapshot.docs.map((doc) => doc.data());
+      setFilterList(data);
+    };
+    fetchData();
+  }, []);
   const { onChange } = useInputChange(values, setValues);
+  const { show: showFilter, toggle } = useToggle();
+  const handleSelectFilter = (filter) => {
+    setValues({
+      ...values,
+      filter,
+    });
+    toggle();
+  };
   return (
     <div>
       <form
@@ -71,14 +89,21 @@ const CardAddNew = () => {
           </FormGroup>
           <FormGroup>
             <Label>Filter</Label>
-            <Input
-              type="text"
-              name="filter"
-              placeholder="Enter the filter"
-              onChange={onChange}
-              required
-              value={values.filter}
-            />
+            <Dropdown
+              show={showFilter}
+              onClick={toggle}
+              placeholder={values.filter || "Select filter"}
+            >
+              {filterList.map((item, index) => (
+                <div
+                  key={item.name}
+                  className="p-3 capitalize rounded cursor-pointer hover:text-blue-500 hover:bg-slate-800"
+                  onClick={() => handleSelectFilter(item.name)}
+                >
+                  {item.name}
+                </div>
+              ))}
+            </Dropdown>
           </FormGroup>
         </div>
         <FormGroup>
