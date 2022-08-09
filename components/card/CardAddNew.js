@@ -1,3 +1,5 @@
+import Button from "components/button/Button";
+import CodeEditorBlock from "components/CodeEditorBlock";
 import Dropdown from "components/dropdown/Dropdown";
 import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
@@ -5,6 +7,7 @@ import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Textarea from "components/textarea/Textarea";
 import { cardStatus } from "constant/global-constant";
+// const CodeEditor = dynamic(() => "@uiw/react-textarea-code-editor");
 import {
   addDoc,
   collection,
@@ -13,6 +16,7 @@ import {
 } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
+import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -25,6 +29,7 @@ const CardAddNew = () => {
     cssCode: "",
     status: cardStatus.APPROVED,
   });
+  console.log("handleAddNewCard ~ values", values);
   const handleAddNewCard = (e) => {
     e.preventDefault();
     const isAllInputFilled = Object.values(values).every((item) => item !== "");
@@ -108,45 +113,26 @@ const CardAddNew = () => {
         </div>
         <FormGroup>
           <Label>HTML</Label>
-          <Textarea
+          <CodeEditorBlock
             name="htmlCode"
-            placeholder="Enter your HTML code here..."
             onChange={onChange}
-            required
-            value={values.htmlCode}
-          ></Textarea>
+            code={values.htmlCode}
+            language="html"
+            placeholder="Enter your HTML code"
+          ></CodeEditorBlock>
         </FormGroup>
         <FormGroup>
           <Label>CSS</Label>
-          <Textarea
-            name="cssCode"
-            placeholder="Enter your CSS code here..."
+          <CodeEditorBlock
             onChange={onChange}
-            required
-            value={values.cssCode}
-          ></Textarea>
+            code={values.cssCode}
+            language="css"
+            placeholder="Enter your CSS code"
+            name="cssCode"
+          ></CodeEditorBlock>
         </FormGroup>
         <div className="mt-10 text-center">
-          <button
-            type="submit"
-            className="inline-flex items-center justify-center px-8 py-4 font-sans font-semibold tracking-wide text-white bg-blue-500 rounded-lg h-[60px]"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            <span>Add new card</span>
-          </button>
+          <Button type="submit">Add new card</Button>
         </div>
       </form>
     </div>

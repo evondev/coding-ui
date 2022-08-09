@@ -15,7 +15,7 @@ const Dropdown = ({
         {placeholder}
       </div>
       {show && (
-        <div className="absolute left-0 w-full p-2 mt-2 border rounded-lg shadow bg-slate-900 top-full border-slate-200 dark:border-slate-700">
+        <div className="absolute left-0 z-50 w-full p-2 mt-2 border rounded-lg shadow bg-slate-900 top-full border-slate-200 dark:border-slate-700">
           {/*  */}
           {children}
         </div>

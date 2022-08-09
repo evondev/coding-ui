@@ -1,0 +1,16 @@
+// Editor
+body .w-tc-editor {
+  @apply font-normal w-full p-4 text-base text-white transition-all border border-transparent rounded-lg outline-none dark:border-slate-700 dark:bg-slate-900 focus:border-blue-500 resize-none min-h-[200px] overflow-y-auto border-slate-200 bg-white font-mono leading-loose;
+  textarea {
+    @apply placeholder:font-primary placeholder:font-medium;
+  }
+  .code-highlight {
+    @apply hidden;
+  }
+  code[class^="language-"].code-highlight {
+    @apply block;
+  }
+  .token.property {
+    @apply pl-5;
+  }
+}

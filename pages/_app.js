@@ -1,5 +1,6 @@
 import "../styles/globals.scss";
 import { ToastContainer } from "react-toastify";
+import "@uiw/react-textarea-code-editor/dist.css";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "react-modal";
 import useDarkMode from "hooks/useDarkMode";
