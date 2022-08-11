@@ -13,8 +13,10 @@ module.exports = {
       },
       colors: {
         grayf5: "#F5F7FA",
-        primary: "#ff65f2",
+        primary: "#fc6c8f",
         secondary: "#fcb564",
+        third: "#6a5af9",
+        fourth: "#d66efd",
       },
     },
   },

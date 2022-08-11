@@ -11,6 +11,7 @@ const LayoutMain = ({ children, title = "CodingUI" }) => {
         <title>{title}</title>
       </Head>
       <Header></Header>
+      <Heart></Heart>
       <main className="l-container">
         <Banner></Banner>
         {children}

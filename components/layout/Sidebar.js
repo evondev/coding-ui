@@ -12,8 +12,8 @@ const Sidebar = () => {
       className="relative p-5 border-r border-slate-200 dark:border-slate-800"
     >
       <Link href="/">
-        <a className="flex items-center justify-start mb-20 text-lg gap-x-5">
-          <img src="/logo.png" alt="codingui" className="max-w-[30px]" />
+        <a className="flex items-center justify-start px-4 mt-5 mb-10 text-sm font-bold gap-x-3">
+          <img src="/logo.png" alt="codingui" className="max-w-[25px]" />
           <span>CodingUI</span>
         </a>
       </Link>

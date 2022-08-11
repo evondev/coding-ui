@@ -10,7 +10,7 @@ const Input = (props) => {
     <div className="relative w-full">
       <input
         type={inputType}
-        className="w-full p-4 text-base text-white transition-all bg-white border border-transparent rounded-lg outline-none dark:bg-slate-900 focus:border-blue-500 border-slate-200 dark:border-slate-700"
+        className="w-full p-4 text-base transition-all bg-white border rounded-lg outline-none text-slate-900 dark:text-white dark:bg-slate-900 focus:border-blue-500 border-slate-200 dark:border-slate-700"
         {...rest}
       ></input>
       {type === "password" && (

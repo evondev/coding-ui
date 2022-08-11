@@ -44,7 +44,7 @@ function FilterItem({ item, activeCard, onClick }) {
       key={item}
       className={`flex items-center py-3 font-medium cursor-pointer gap-x-2 capitalize ${
         activeCard
-          ? "text-blue-500 border-b-2 border-blue-500 pointer-events-none"
+          ? "text-transparent bg-gradient-primary bg-clip-text border-b-2 border-third pointer-events-none"
           : "text-slate-900 dark:text-slate-300"
       }`}
       onClick={onClick}

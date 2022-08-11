@@ -4,7 +4,7 @@ import React from "react";
 const ButtonNew = ({ href = "/" }) => {
   return (
     <Link href={href}>
-      <a className="fixed flex items-center justify-center p-1 bg-blue-500 rounded-full w-11 h-11 bottom-5 right-5">
+      <a className="fixed flex items-center justify-center p-1 text-white bg-blue-500 rounded-full w-11 h-11 bottom-5 right-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6"

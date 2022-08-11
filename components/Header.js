@@ -5,7 +5,7 @@ import React from "react";
 const Header = () => {
   const { userInfo } = useAuth();
   return (
-    <div className="py-5 border-b l-container border-slate-800">
+    <div className="py-5 border-b l-container border-slate-200 dark:border-slate-800">
       <div className="flex items-center justify-between">
         <Link href="/">
           <a className="inline-flex items-center font-bold gap-x-3">
@@ -27,14 +27,16 @@ const Header = () => {
               />
               <p>
                 <span>Hello,</span>
-                <strong className="ml-1 font-bold text-blue-500">User</strong>
+                <strong className="ml-1 font-bold text-transparent bg-clip-text bg-gradient-primary">
+                  User
+                </strong>
               </p>
             </a>
           </Link>
         )}
         {!userInfo?.email && (
           <Link href="/login">
-            <a className="flex items-center px-4 py-2 text-sm font-bold bg-pink-500 rounded-lg">
+            <a className="flex items-center px-6 py-3 text-sm font-bold text-white rounded-lg bg-gradient-secondary">
               Login to account
             </a>
           </Link>

@@ -15,7 +15,10 @@
 }
 @layer utilities {
   .bg-gradient-primary {
-    background-image: linear-gradient(245deg, #fcb564, #ff65f2);
+    background-image: linear-gradient(to right top, #6a5af9, #d66efd);
+  }
+  .bg-gradient-secondary {
+    background-image: linear-gradient(to right top, #fc6c8f, #ffb86c);
   }
   .hidden-scroll {
     -ms-overflow-style: none;
@@ -23,6 +26,10 @@
   }
   .hidden-scroll::-webkit-scrollbar {
     display: none;
+  }
+  input:invalid,
+  input:invalid:focus {
+    @apply border-primary;
   }
 }
 .table {
@@ -37,5 +44,50 @@
 }
 .l-container {
   @apply px-5 mx-auto max-w-7xl;
+}
+.button-effect {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.button-effect:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: auto;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: white;
+  opacity: 0.1;
+  z-index: -1;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.button-effect:hover:before {
+  left: auto;
+  right: 0;
+  width: 100%;
+}
+.pointer-effect {
+  animation: pointer 1s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@keyframes pointer {
+  100% {
+    transform: scale(0.75);
+  }
+}
+.heart-animate.is-active {
+  animation: zoom 0.5s 1 linear;
+}
+@keyframes zoom {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 @import "editor";
