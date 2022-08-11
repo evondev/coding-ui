@@ -42,12 +42,7 @@ const LoginPage = () => {
   };
   return (
     <LayoutMain title="Login Page">
-      <div className="text-center">
-        <h1 className="inline-block mb-10 text-4xl font-bold text-center text-blue-500">
-          Login to your account
-        </h1>
-      </div>
-      <div className="max-w-2xl p-10 mx-auto border rounded-lg border-slate-200 dark:border-slate-800">
+      <div className="max-w-xl mx-auto rounded-lg dark:border-slate-800">
         <form onSubmit={handleLogin}>
           <FormGroup>
             <Label>Email</Label>

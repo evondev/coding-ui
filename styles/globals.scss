@@ -35,4 +35,7 @@
     @apply text-slate-400;
   }
 }
+.l-container {
+  @apply px-5 mx-auto max-w-7xl;
+}
 @import "editor";

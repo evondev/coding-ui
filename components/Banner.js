@@ -1,20 +1,28 @@
 import Link from "next/link";
 import React from "react";
+import { IconChat, IconGithub } from "./icons";
 
 const Banner = () => {
   return (
     <div className="py-20">
-      <Link href="/">
-        <a className="block">
-          <img
-            src="/logo.png"
-            alt="coding-ui"
-            className="mx-auto max-w-[100px] mb-5"
+      <div className="flex items-center justify-center w-20 h-20 mx-auto mb-5 border border-blue-500 bg-opacity-10">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
           />
-        </a>
-      </Link>
-      <h1 className="max-w-3xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center text-slate-900 dark:text-white">
-        Get your free UI components with just single click 👇
+        </svg>
+      </div>
+      <h1 className="max-w-xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center text-slate-900 dark:text-white">
+        Get your free UI components with just few click
       </h1>
       <div className="flex flex-col justify-center gap-5 sm:items-center sm:flex-row">
         <a
@@ -23,39 +31,16 @@ const Banner = () => {
           rel="noreferrer"
           className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-slate-800 rounded-lg h-[60px] w-full sm:w-[230px]"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              fill="currentColor"
-            />
-          </svg>
+          <IconGithub></IconGithub>
           View on Github
         </a>
         <a
           href="https://evondev.com"
           target="_blank"
-          className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-gradient-primary rounded-lg h-[60px] w-full sm:w-[230px]"
+          className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-pink-500 rounded-lg h-[60px] w-full sm:w-[230px]"
           rel="noreferrer"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-            />
-          </svg>
+          <IconChat></IconChat>
           <span>Contact me</span>
         </a>
       </div>

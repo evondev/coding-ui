@@ -1,4 +1,5 @@
 import Button from "components/button/Button";
+import CodeEditorBlock from "components/CodeEditorBlock";
 import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
@@ -78,23 +79,23 @@ const CardUpdate = ({ id }) => {
         </div>
         <FormGroup>
           <Label>HTML</Label>
-          <Textarea
+          <CodeEditorBlock
             name="htmlCode"
-            placeholder="Enter your HTML code here..."
             onChange={onChange}
-            required
-            value={values.htmlCode}
-          ></Textarea>
+            code={values.htmlCode}
+            language="html"
+            placeholder="Enter your HTML code"
+          ></CodeEditorBlock>
         </FormGroup>
         <FormGroup>
           <Label>CSS</Label>
-          <Textarea
-            name="cssCode"
-            placeholder="Enter your CSS code here..."
+          <CodeEditorBlock
             onChange={onChange}
-            required
-            value={values.cssCode}
-          ></Textarea>
+            code={values.cssCode}
+            language="css"
+            placeholder="Enter your CSS code"
+            name="cssCode"
+          ></CodeEditorBlock>
         </FormGroup>
         <div className="mt-10 text-center">
           <Button type="submit">Update card</Button>

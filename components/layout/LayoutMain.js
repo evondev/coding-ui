@@ -1,4 +1,6 @@
 import Banner from "components/Banner";
+import Header from "components/Header";
+import Heart from "components/Heart";
 import Head from "next/head";
 import React from "react";
 
@@ -8,8 +10,11 @@ const LayoutMain = ({ children, title = "CodingUI" }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <Banner></Banner>
-      {children}
+      <Header></Header>
+      <main className="l-container">
+        <Banner></Banner>
+        {children}
+      </main>
     </>
   );
 };

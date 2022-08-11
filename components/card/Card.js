@@ -8,6 +8,7 @@ import ReactModal from "react-modal";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { filterItems } from "constant/global-constant";
+import { IconEye, IconHeart } from "components/icons";
 
 const CardStyles = styled.div`
   ${(props) => props.css}
@@ -29,7 +30,7 @@ const Card = (props) => {
     };
   }, [htmlCode, cssCode]);
   const handleViewCode = () => {
-    toast.warning("This featured is building");
+    toast.warning("This featured will coming soon");
   };
   return (
     <>
@@ -37,24 +38,15 @@ const Card = (props) => {
         data-filter={filter}
         className="relative flex flex-col p-5 border rounded border-slate-200 dark:border-slate-800 card"
       >
-        <button
-          className="absolute flex items-center justify-center w-10 h-10 p-2 rounded-full dark:bg-black bg-opacity-40 right-2 top-2 dark:text-slate-400 text-slate-900 bg-slate-400"
-          onClick={handleViewCode}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
-        <div className="py-5 my-5 card-ui">
+        <div className="absolute flex items-center right-2 top-2 gap-x-2">
+          <ButtonAction onClick={handleViewCode}>
+            <IconEye></IconEye>
+          </ButtonAction>
+          <ButtonAction onClick={handleViewCode}>
+            <IconHeart></IconHeart>
+          </ButtonAction>
+        </div>
+        <div className="pt-10 pb-5 my-5 card-ui">
           <CardStyles css={cssSourceCode}>
             {htmlSourceCode && <>{parse(htmlSourceCode)}</>}
           </CardStyles>
@@ -107,6 +99,17 @@ const Card = (props) => {
   );
 };
 
+function ButtonAction({ children, onClick }) {
+  return (
+    <button
+      className="flex items-center justify-center w-10 h-10 p-2 rounded-full dark:bg-black bg-opacity-40 dark:text-slate-400 text-slate-900 bg-slate-400 hover:text-white"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
 function ButtonCopy({ children, onClick = () => {}, type = "html" }) {
   let bgClassName =
     type === "html" ? "hover:bg-blue-500" : "hover:bg-orange-500";
@@ -136,7 +139,7 @@ function ButtonCopy({ children, onClick = () => {}, type = "html" }) {
 }
 Card.propTypes = {
   title: PropTypes.string.isRequired,
-  filter: PropTypes.oneOf(filterItems).isRequired,
+  filter: PropTypes.string.isRequired,
   htmlCode: PropTypes.string,
   cssCode: PropTypes.string,
 };
