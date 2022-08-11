@@ -1,4 +1,4 @@
-import CardUpdate from "components/card/CardUpdate";
+import CardUpdate from "modules/card/CardUpdate";
 import LayoutDashboard from "components/layout/LayoutDashboard";
 import { useRouter } from "next/router";
 import React from "react";

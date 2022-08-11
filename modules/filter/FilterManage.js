@@ -1,64 +1,56 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Link from "next/link";
-import LabelStatus from "components/label/LabelStatus";
 import ButtonAction from "components/button/ButtonAction";
-import Button from "components/button/Button";
-import useFetchCards from "hooks/useFetchCards";
-import { cardStatus } from "constant/global-constant";
-import { IconEdit, IconTrash } from "components/icons";
-import { collection, deleteDoc, doc } from "firebase/firestore";
+import ButtonNew from "components/button/ButtonNew";
 import { db } from "components/firebase/firebase-config";
+import { IconEdit, IconTrash } from "components/icons";
+import LabelStatus from "components/label/LabelStatus";
+import { filterStatus } from "constant/global-constant";
+import { deleteDoc, doc } from "firebase/firestore";
+import useFetchFilter from "hooks/useFetchFilter";
+import Link from "next/link";
+import React from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import ButtonNew from "components/button/ButtonNew";
 
-const CardManage = (props) => {
-  const { cards } = useFetchCards();
-  if (cards.length <= 0) return null;
-
+const FilterManage = () => {
+  const { filters } = useFetchFilter();
+  if (filters.length <= 0) return null;
   return (
     <div className="mt-10">
-      <ButtonNew href="/manage/new-card"></ButtonNew>
+      <ButtonNew href="/manage/new-filter"></ButtonNew>
       <div className="table overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr>
               <th>Name</th>
-              <th>Filter</th>
               <th>Status</th>
               <th>CreatedAt</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {cards.map((card) => (
-              <CardRow key={card.title} card={card}></CardRow>
+            {filters.map((filter) => (
+              <FilterRow key={filter.id} filter={filter}></FilterRow>
             ))}
           </tbody>
         </table>
       </div>
-      {/* <div className="mt-10 text-center">
-        <Button>Load more...</Button>
-      </div> */}
     </div>
   );
 };
 
-const CardRow = ({ card }) => {
+const FilterRow = ({ filter }) => {
   const renderStatus = (status) => {
     switch (status) {
-      case cardStatus.APPROVED:
+      case filterStatus.APPROVED:
         return <LabelStatus className="bg-green-500">Approved</LabelStatus>;
 
       default:
         return <LabelStatus className="bg-red-500">Rejected</LabelStatus>;
     }
   };
-  const handleDeleteCard = async (id) => {
+  const handleDeleteFilter = async (id) => {
     try {
-      const docRef = doc(db, "cards", id);
-      console.log("handleDeleteCard ~ docRef", docRef);
+      const docRef = doc(db, "filters", id);
       Swal.fire({
         title: "Are you sure?",
         icon: "warning",
@@ -67,24 +59,23 @@ const CardRow = ({ card }) => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           await deleteDoc(docRef);
-          toast.success("Delete card successfully");
+          toast.success("Delete filter successfully");
         }
       });
     } catch (error) {
-      toast.error("Delete card failed");
+      toast.error("Delete filter failed");
     }
   };
   return (
     <tr>
-      <td>{card.title}</td>
-      <td className="capitalize">{card.filter}</td>
-      <td>{renderStatus(card.status)}</td>
+      <td className="capitalize">{filter.name}</td>
+      <td>{renderStatus(filter.status)}</td>
       <td>
-        {new Date(card.createdAt?.seconds * 1000).toLocaleDateString("vi-VI")}
+        {new Date(filter.createdAt?.seconds * 1000).toLocaleDateString("vi-VI")}
       </td>
       <td>
         <div className="flex items-center gap-x-5">
-          <Link href={`/manage/update-card?id=${card.id}`}>
+          <Link href={`/manage/update-filter?id=${filter.id}`}>
             <a>
               <ButtonAction className="hover:text-blue-500 hover:border-blue-500">
                 <IconEdit></IconEdit>
@@ -93,7 +84,7 @@ const CardRow = ({ card }) => {
           </Link>
           <ButtonAction
             className="hover:text-red-500 hover:border-red-500"
-            onClick={() => handleDeleteCard(card.id)}
+            onClick={() => handleDeleteFilter(filter.id)}
           >
             <IconTrash></IconTrash>
           </ButtonAction>
@@ -103,6 +94,4 @@ const CardRow = ({ card }) => {
   );
 };
 
-CardManage.propTypes = {};
-
-export default CardManage;
+export default FilterManage;

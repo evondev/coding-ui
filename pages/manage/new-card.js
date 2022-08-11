@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import LayoutDashboard from "components/layout/LayoutDashboard";
-import CardAddNew from "components/card/CardAddNew";
+import CardAddNew from "modules/card/CardAddNew";
 
 const AddNewCardPage = () => {
   return (

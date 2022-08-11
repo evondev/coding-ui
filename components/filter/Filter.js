@@ -3,7 +3,7 @@ import React from "react";
 
 const FilterMenu = () => {
   const [activeCard, setActiveCard] = React.useState("all");
-  const { filters: filterItems } = useFetchFilter();
+  const { filters: filterItems } = useFetchFilter(true);
   const handleFilterCard = (item) => {
     setActiveCard(item);
     const cards = document.querySelectorAll(".card");

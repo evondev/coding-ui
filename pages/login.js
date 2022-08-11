@@ -34,7 +34,7 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast.success("Login successful");
-      router.push("/dashboard");
+      router.push("/manage/cards");
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -42,8 +42,8 @@ const LoginPage = () => {
   };
   return (
     <LayoutMain title="Login Page">
-      <div className="max-w-xl mx-auto rounded-lg dark:border-slate-800">
-        <form onSubmit={handleLogin}>
+      <div className="max-w-2xl mx-auto rounded-lg dark:border-slate-800">
+        <form onSubmit={handleLogin} autoComplete="off">
           <FormGroup>
             <Label>Email</Label>
             <Input

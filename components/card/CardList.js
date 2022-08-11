@@ -1,9 +1,10 @@
+import { cardStatus } from "constant/global-constant";
 import useFetchCards from "hooks/useFetchCards";
 import React from "react";
 import Card from "./Card";
 
 const CardList = () => {
-  const { cards } = useFetchCards();
+  const { cards } = useFetchCards(cardStatus.APPROVED);
   if (cards.length <= 0) return null;
   return (
     <div

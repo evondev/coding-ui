@@ -16,7 +16,6 @@ import {
 } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
-import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -29,7 +28,6 @@ const CardAddNew = () => {
     cssCode: "",
     status: cardStatus.APPROVED,
   });
-  console.log("handleAddNewCard ~ values", values);
   const handleAddNewCard = (e) => {
     e.preventDefault();
     const isAllInputFilled = Object.values(values).every((item) => item !== "");
@@ -43,6 +41,7 @@ const CardAddNew = () => {
         ...values,
         createdAt: serverTimestamp(),
       });
+      toast.success("Card added successfully");
     } catch (err) {
       toast.error(err.message);
     } finally {
@@ -53,7 +52,6 @@ const CardAddNew = () => {
         cssCode: "",
       });
     }
-    toast.success("Card added successfully");
   };
   useEffect(() => {
     const fetchData = async () => {
