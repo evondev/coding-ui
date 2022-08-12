@@ -3,6 +3,7 @@ import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
+import Toggle from "components/toggle/Toggle";
 import { filterStatus } from "constant/global-constant";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
@@ -65,26 +66,11 @@ const FilterAddNew = () => {
         </FormGroup>
         <FormGroup>
           <Label>Status</Label>
-          <label className="cursor-pointer">
-            <input
-              type="checkbox"
-              name="status"
-              onChange={handleToggleStatus}
-              id=""
-              className="hidden"
-            />
-            <span
-              className={`transition-all rounded-full w-[100px] p-2 inline-block h-12 ${
-                values.status ? "bg-blue-500" : "bg-slate-800"
-              }`}
-            >
-              <span
-                className={`transition-all inline-block w-8 h-8 bg-white rounded-full ${
-                  values.status ? "translate-x-[52px]" : ""
-                }`}
-              ></span>
-            </span>
-          </label>
+          <Toggle
+            name="status"
+            on={values.status}
+            onChange={handleToggleStatus}
+          ></Toggle>
         </FormGroup>
 
         <div className="mt-10 text-center">

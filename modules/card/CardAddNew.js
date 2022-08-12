@@ -18,6 +18,7 @@ import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import CardFilterDropdown from "./CardFilterDropdown";
 
 const CardAddNew = () => {
   const [filterList, setFilterList] = useState([]);
@@ -26,7 +27,6 @@ const CardAddNew = () => {
     filter: "",
     htmlCode: "",
     cssCode: "",
-    status: cardStatus.APPROVED,
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
@@ -39,6 +39,7 @@ const CardAddNew = () => {
     try {
       addDoc(colRef, {
         ...values,
+        status: cardStatus.APPROVED,
         createdAt: serverTimestamp(),
       });
       toast.success("Card added successfully");
@@ -92,21 +93,12 @@ const CardAddNew = () => {
           </FormGroup>
           <FormGroup>
             <Label>Filter</Label>
-            <Dropdown
-              show={showFilter}
-              onClick={toggle}
+            <CardFilterDropdown
               placeholder={values.filter || "Select filter"}
-            >
-              {filterList.map((item, index) => (
-                <div
-                  key={item.name}
-                  className="p-3 capitalize rounded cursor-pointer hover:bg-blue-50 hover:text-blue-500 dark:hover:bg-slate-800"
-                  onClick={() => handleSelectFilter(item.name)}
-                >
-                  {item.name}
-                </div>
-              ))}
-            </Dropdown>
+              onClick={toggle}
+              onClickItem={handleSelectFilter}
+              show={showFilter}
+            ></CardFilterDropdown>
           </FormGroup>
         </div>
         <FormGroup>

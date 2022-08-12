@@ -5,11 +5,14 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Textarea from "components/textarea/Textarea";
+import Toggle from "components/toggle/Toggle";
 import { cardStatus } from "constant/global-constant";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
+import useToggle from "hooks/useToggle";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import CardFilterDropdown from "./CardFilterDropdown";
 
 const CardUpdate = ({ id }) => {
   const [values, setValues] = useState({
@@ -17,7 +20,6 @@ const CardUpdate = ({ id }) => {
     filter: "",
     htmlCode: "",
     cssCode: "",
-    status: cardStatus.APPROVED,
   });
   const { onChange } = useInputChange(values, setValues);
   useEffect(() => {
@@ -42,9 +44,25 @@ const CardUpdate = ({ id }) => {
       });
       toast.success("Card updated successfully");
     } catch (err) {
-      console.log(err.message);
       toast.error(err.message);
     }
+  };
+  const handleToggleStatus = () => {
+    setValues({
+      ...values,
+      status:
+        values.status === cardStatus.APPROVED
+          ? cardStatus.REJECTED
+          : cardStatus.APPROVED,
+    });
+  };
+  const { show: showFilter, toggle } = useToggle();
+  const handleSelectFilter = (filter) => {
+    setValues({
+      ...values,
+      filter,
+    });
+    toggle();
   };
   return (
     <div>
@@ -53,6 +71,14 @@ const CardUpdate = ({ id }) => {
         onSubmit={handleUpdateCard}
         autoComplete="off"
       >
+        <FormGroup>
+          <Label>Status</Label>
+          <Toggle
+            name="status"
+            on={values.status === cardStatus.APPROVED ? true : false}
+            onChange={handleToggleStatus}
+          ></Toggle>
+        </FormGroup>
         <div className="flex items-center gap-x-5">
           <FormGroup>
             <Label>Title</Label>
@@ -67,14 +93,12 @@ const CardUpdate = ({ id }) => {
           </FormGroup>
           <FormGroup>
             <Label>Filter</Label>
-            <Input
-              type="text"
-              name="filter"
-              placeholder="Enter the filter"
-              onChange={onChange}
-              required
-              value={values.filter}
-            />
+            <CardFilterDropdown
+              placeholder={values.filter || "Select filter"}
+              onClick={toggle}
+              onClickItem={handleSelectFilter}
+              show={showFilter}
+            ></CardFilterDropdown>
           </FormGroup>
         </div>
         <FormGroup>
@@ -97,6 +121,7 @@ const CardUpdate = ({ id }) => {
             name="cssCode"
           ></CodeEditorBlock>
         </FormGroup>
+
         <div className="mt-10 text-center">
           <Button type="submit">Update card</Button>
         </div>

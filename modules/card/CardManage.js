@@ -12,19 +12,74 @@ import { db } from "components/firebase/firebase-config";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import ButtonNew from "components/button/ButtonNew";
+import Input from "components/input/Input";
+import Dropdown from "components/dropdown/Dropdown";
+import useInputChange from "hooks/useInputChange";
+import DropdownItem from "components/dropdown/DropdownItem";
+import CardFilterDropdown from "./CardFilterDropdown";
+import useToggle from "hooks/useToggle";
 
 const CardManage = (props) => {
-  const { cards } = useFetchCards();
-  if (cards.length <= 0) return null;
+  const [filter, setFilter] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [status, setStatus] = React.useState(null);
+  const [statusText, setStatusText] = React.useState("");
+  const { show, toggle } = useToggle();
+  const { show: showStatus, toggle: toggleStatus } = useToggle();
+  const handleClickFilter = (item) => {
+    setFilter(item);
+    toggle();
+  };
+  const handleClickStatus = (item) => {
+    setStatus(item);
+    setStatusText(item === cardStatus.APPROVED ? "Approved" : "Rejected");
+    toggleStatus();
+  };
+  const { cards } = useFetchCards(status, name, filter);
 
   return (
     <div className="mt-10">
       <ButtonNew href="/manage/new-card"></ButtonNew>
+      <div className="flex justify-end mb-10 gap-x-5">
+        <div className="w-[400px]">
+          <Input
+            name="filter"
+            placeholder="Filter by name"
+            onChange={(e) => setName(e.target.value)}
+          ></Input>
+        </div>
+        <div className="w-[200px]">
+          <Dropdown
+            placeholder={statusText || "Filter by status"}
+            show={showStatus}
+            onClick={toggleStatus}
+          >
+            <DropdownItem
+              onClick={() => handleClickStatus(cardStatus.APPROVED)}
+            >
+              Approved
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => handleClickStatus(cardStatus.REJECTED)}
+            >
+              Reject
+            </DropdownItem>
+          </Dropdown>
+        </div>
+        <div className="w-[200px]">
+          <CardFilterDropdown
+            show={show}
+            onClick={toggle}
+            onClickItem={handleClickFilter}
+            placeholder={filter}
+          ></CardFilterDropdown>
+        </div>
+      </div>
       <div className="table overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Title</th>
               <th>Filter</th>
               <th>Status</th>
               <th>CreatedAt</th>
@@ -32,15 +87,16 @@ const CardManage = (props) => {
             </tr>
           </thead>
           <tbody>
-            {cards.map((card) => (
-              <CardRow key={card.title} card={card}></CardRow>
-            ))}
+            {cards.length > 0 &&
+              cards.map((card) => (
+                <CardRow key={card.title} card={card}></CardRow>
+              ))}
           </tbody>
         </table>
       </div>
-      {/* <div className="mt-10 text-center">
-        <Button>Load more...</Button>
-      </div> */}
+      <div className="mt-10 text-center">
+        <div className="cursor-pointer text-slate-400">Load more...</div>
+      </div>
     </div>
   );
 };

@@ -9,8 +9,25 @@
     --primary: var(--blue);
     --pink: #f62682;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply dark:bg-slate-900 font-primary text-slate-900 dark:text-white pb-10 font-light bg-grayf5;
+  }
+
+  .w-tc-editor::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 5px;
+  }
+  .w-tc-editor::-webkit-scrollbar-track,
+  body::-webkit-scrollbar-track {
+    border-radius: 100rem;
+  }
+  .w-tc-editor::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb {
+    border-radius: 100rem;
+    background-image: linear-gradient(245deg, #fcb564, #ff65f2);
   }
 }
 @layer utilities {
@@ -71,13 +88,16 @@
 .pointer-effect {
   animation: pointer 1s infinite cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+.ReactModal__Body--open {
+  overflow: hidden;
+}
 @keyframes pointer {
   100% {
     transform: scale(0.75);
   }
 }
 .heart-animate.is-active {
-  animation: zoom 0.5s 1 linear;
+  animation: zoom 0.25s 1 linear;
 }
 @keyframes zoom {
   0% {

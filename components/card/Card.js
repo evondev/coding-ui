@@ -4,11 +4,11 @@ import parse from "react-html-parser";
 import copyToClipBoard from "../../utils/copyToClipboard";
 import pretty from "pretty";
 import cssbeautify from "cssbeautify";
-import ReactModal from "react-modal";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
-import { filterItems } from "constant/global-constant";
 import { IconEye, IconHeart } from "components/icons";
+import { globalStore } from "store/global-store";
+import shallow from "zustand/shallow";
 
 const CardStyles = styled.div`
   ${(props) => props.css}
@@ -29,8 +29,23 @@ const Card = (props) => {
       mountedRef.current = false;
     };
   }, [htmlCode, cssCode]);
+  const { setIsShowCode, setHtmlCodeView, setCssCodeView } = globalStore(
+    (state) => ({
+      setIsShowCode: state.setIsShowCode,
+      setHtmlCodeView: state.setHtmlCodeView,
+      setCssCodeView: state.setCssCodeView,
+    }),
+    shallow
+  );
   const handleViewCode = () => {
-    toast.warning("This featured will coming soon");
+    setIsShowCode(true);
+    setHtmlCodeView(pretty(htmlSourceCode, { ocd: true }));
+    setCssCodeView(
+      cssbeautify(cssSourceCode, {
+        indent: `  `,
+        autosemicolon: true,
+      })
+    );
   };
   return (
     <>
@@ -42,9 +57,9 @@ const Card = (props) => {
           <ButtonAction onClick={handleViewCode}>
             <IconEye></IconEye>
           </ButtonAction>
-          <ButtonAction onClick={handleViewCode}>
+          {/* <ButtonAction onClick={handleViewCode}>
             <IconHeart></IconHeart>
-          </ButtonAction>
+          </ButtonAction> */}
         </div>
         <div className="pt-10 pb-5 my-5 card-ui">
           <CardStyles css={cssSourceCode}>
@@ -83,18 +98,6 @@ const Card = (props) => {
           </div>
         </div>
       </div>
-      {/* <ReactModal
-        isOpen
-        overlayClassName="bg-black bg-opacity-50 fixed inset-0 flex items-center justify-center"
-        className="max-w-2xl p-5 rounded-lg bg-slate-800"
-      >
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est nulla
-          vero laboriosam maxime sunt dignissimos iure? Et libero amet, quod
-          necessitatibus modi qui voluptatibus id, tenetur adipisci cum, sint
-          quis.
-        </div>
-      </ReactModal> */}
     </>
   );
 };

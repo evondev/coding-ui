@@ -26,7 +26,7 @@ const Heart = () => {
     setLiked(true);
     setLikes((likes) => likes + 1);
     const colRef = doc(db, "hearts", "count");
-    updateDoc(colRef, { count: likes }, { merge: true });
+    updateDoc(colRef, { count: likes + 1 }, { merge: true });
     setTimeout(() => {
       setLiked(false);
     }, 500);
@@ -36,7 +36,7 @@ const Heart = () => {
       <span className="text-sm font-bold">{likes}</span>
 
       <div
-        className={`flex items-center justify-center text-pink-500 bg-black bg-opacity-50 rounded-full cursor-pointer w-14 h-14 heart-animate ${
+        className={`flex items-center justify-center bg-black bg-opacity-50 rounded-full cursor-pointer w-14 h-14 heart-animate text-primary ${
           liked ? "is-active" : ""
         }`}
         onClick={handleClickHeart}
