@@ -18,7 +18,7 @@ const Header = () => {
           </a>
         </Link>
         {userInfo?.email && (
-          <Link href="/profile">
+          <Link href="/manage/cards">
             <a className="flex items-center gap-x-3">
               <div className="object-cover w-10 h-10 bg-white rounded-full" />
               <p>

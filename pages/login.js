@@ -16,7 +16,7 @@ const LoginPage = () => {
   const { userInfo } = useAuth();
   const router = useRouter();
   useEffect(() => {
-    if (userInfo?.email) router.push("/dashboard");
+    if (userInfo?.email) router.push("/manage/cards");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
   const [values, setValues] = React.useState({
