@@ -10,8 +10,11 @@ import { cardStatus } from "constant/global-constant";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
+import pretty from "pretty";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import cssbeautify from "cssbeautify";
+
 import CardFilterDropdown from "./CardFilterDropdown";
 
 const CardUpdate = ({ id }) => {
@@ -29,6 +32,11 @@ const CardUpdate = ({ id }) => {
       if (docSnap.exists()) {
         setValues({
           ...docSnap.data(),
+          htmlCode: pretty(docSnap.data().htmlCode),
+          cssCode: cssbeautify(docSnap.data().cssCode, {
+            indent: `  `,
+            autosemicolon: true,
+          }),
           id: docSnap.id,
         });
       }

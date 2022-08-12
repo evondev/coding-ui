@@ -2,10 +2,23 @@ import { cardStatus } from "constant/global-constant";
 import useFetchCards from "hooks/useFetchCards";
 import React from "react";
 import Card from "./Card";
+import CardLoading from "./CardLoading";
 
 const CardList = () => {
-  const { cards } = useFetchCards(cardStatus.APPROVED);
-  if (cards.length <= 0) return null;
+  const { cards, isLoading } = useFetchCards({ status: cardStatus.APPROVED });
+  if (isLoading)
+    return (
+      <div
+        className="grid grid-cols-1 gap-10 lg:grid-cols-3"
+        aria-label="layout-grid-equals"
+      >
+        {Array(6)
+          .fill(0)
+          .map((item, index) => (
+            <CardLoading key={index}></CardLoading>
+          ))}
+      </div>
+    );
   return (
     <div
       className="grid grid-cols-1 gap-10 lg:grid-cols-3"

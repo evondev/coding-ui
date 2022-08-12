@@ -35,13 +35,13 @@ const CardManage = (props) => {
     setStatusText(item === cardStatus.APPROVED ? "Approved" : "Rejected");
     toggleStatus();
   };
-  const { cards } = useFetchCards(status, name, filter);
+  const { cards } = useFetchCards({ status, name, filter, count: 100 });
 
   return (
     <div className="mt-10">
       <ButtonNew href="/manage/new-card"></ButtonNew>
       <div className="flex justify-end mb-10 gap-x-5">
-        <div className="w-[400px]">
+        <div className="w-[200px]">
           <Input
             name="filter"
             placeholder="Filter by name"

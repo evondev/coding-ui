@@ -5,7 +5,7 @@ import { IconChat, IconGithub } from "./icons";
 const Banner = () => {
   return (
     <div className="py-20 select-none">
-      <div className="flex items-center justify-center w-20 h-20 mx-auto mb-5 border-4 border-blue-500 bg-opacity-10">
+      <div className="flex items-center justify-center w-20 h-20 mx-auto mb-5 border-4 border-third bg-opacity-10">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="w-6 h-6 pointer-effect"

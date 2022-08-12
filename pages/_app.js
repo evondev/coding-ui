@@ -67,6 +67,7 @@ function MyApp({ Component, pageProps }) {
           <CodeEditorBlock
             code={htmlCodeView}
             name="htmlCodeView"
+            language="html"
           ></CodeEditorBlock>
         </div>
         <div className="flex flex-col mb-5 gap-y-3">
@@ -74,6 +75,7 @@ function MyApp({ Component, pageProps }) {
           <CodeEditorBlock
             code={cssCodeView}
             name="cssCodeView"
+            language="css"
           ></CodeEditorBlock>
         </div>
       </ReactModal>

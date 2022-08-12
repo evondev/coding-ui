@@ -20,11 +20,7 @@ const Header = () => {
         {userInfo?.email && (
           <Link href="/profile">
             <a className="flex items-center gap-x-3">
-              <img
-                src="https://source.unsplash.com/random"
-                alt=""
-                className="object-cover w-10 h-10 rounded-full"
-              />
+              <div className="object-cover w-10 h-10 bg-white rounded-full" />
               <p>
                 <span>Hello,</span>
                 <strong className="ml-1 font-bold text-transparent bg-clip-text bg-gradient-primary">
