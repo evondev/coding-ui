@@ -1,3 +1,5 @@
+import IconPointer from "./icons/IconPointer";
+import { IconFacebook } from "./icons/IconFacebook";
 import Link from "next/link";
 import React from "react";
 import { IconChat, IconGithub } from "./icons";
@@ -6,27 +8,14 @@ const Banner = () => {
   return (
     <div className="py-20 select-none">
       <div className="flex items-center justify-center w-20 h-20 mx-auto mb-5 border-4 border-third bg-opacity-10">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6 pointer-effect"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"
-          />
-        </svg>
+        <IconPointer />
       </div>
       <h1 className="max-w-xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center text-slate-900 dark:text-white">
         Get your free UI components with just few click
       </h1>
       <div className="flex flex-col justify-center gap-5 mb-10 sm:items-center sm:flex-row">
         <a
-          href="https://github.com/evondev/coding-ui"
+          href="#"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-slate-800 rounded-lg h-[60px] w-full sm:w-[230px] button-effect"
@@ -46,20 +35,7 @@ const Banner = () => {
       </div>
       <div className="flex items-center justify-center gap-x-5">
         <SocialIcon href="https://www.facebook.com/evondevblog">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M0 16C0 7.16344 7.16344 0 16 0C24.8366 0 32 7.16344 32 16C32 24.8366 24.8366 32 16 32C7.16344 32 0 24.8366 0 16ZM16 8C20.4 8 24 11.6 24 16C24 20 21.1 23.4 17.1 24V18.3H19L19.4 16H17.2V14.5C17.2 13.9 17.5 13.3 18.5 13.3H19.5V11.3C19.5 11.3 18.6 11.1 17.7 11.1C15.9 11.1 14.7 12.2 14.7 14.2V16H12.7V18.3H14.7V23.9C10.9 23.3 8 20 8 16C8 11.6 11.6 8 16 8Z"
-              fill="currentColor"
-            />
-          </svg>
+          <IconFacebook />
         </SocialIcon>
         <SocialIcon href="https://www.youtube.com/c/evondevfrontend">
           <svg

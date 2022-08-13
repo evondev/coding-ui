@@ -15,15 +15,17 @@
   body {
     @apply dark:bg-slate-900 font-primary text-slate-900 dark:text-white pb-10 font-light bg-grayf5;
   }
-
+  .scrollbar-style::-webkit-scrollbar,
   .w-tc-editor::-webkit-scrollbar,
   body::-webkit-scrollbar {
     width: 5px;
   }
+  .scrollbar-style::-webkit-scrollbar-track,
   .w-tc-editor::-webkit-scrollbar-track,
   body::-webkit-scrollbar-track {
     border-radius: 100rem;
   }
+  .scrollbar-style::-webkit-scrollbar-thumb,
   .w-tc-editor::-webkit-scrollbar-thumb,
   body::-webkit-scrollbar-thumb {
     border-radius: 100rem;

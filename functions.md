@@ -1,0 +1,6 @@
+- Add user `role`: Admin, Creator, User
+- Add liked functionality
+- Update profile page
+- Upload image avatar
+- Global settings for website
+- Add .env config

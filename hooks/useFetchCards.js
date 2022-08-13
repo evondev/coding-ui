@@ -23,28 +23,25 @@ export default function useFetchCards({
       try {
         setLoading(true);
         let colRef = collection(db, "cards");
-        colRef = query(colRef, orderBy("createdAt", "desc"));
-        if (status) {
-          colRef = query(colRef, where("status", "==", status), limit(count));
-        }
-        if (name) {
-          colRef = query(
+        let queries = query(colRef, orderBy("createdAt", "desc"));
+        if (status)
+          queries = query(queries, where("status", "==", status), limit(count));
+        if (name)
+          queries = query(
             colRef,
             where("title", ">=", name),
             where("title", "<=", name + "utf8"),
+            orderBy("title", "desc"),
             limit(count)
           );
-        }
-        if (filter) {
-          colRef = query(colRef, where("filter", "==", filter), limit(count));
-        }
-        onSnapshot(colRef, (querySnapshot) => {
+        if (filter)
+          queries = query(queries, where("filter", "==", filter), limit(count));
+        onSnapshot(queries, (querySnapshot) => {
           const results = [];
           querySnapshot.forEach((doc) => {
             results.push({ id: doc.id, ...doc.data() });
           });
           setCards(results);
-          setLoading(false);
         });
       } catch (err) {
         console.log(err);

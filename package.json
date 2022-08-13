@@ -15,6 +15,7 @@
     "firebase": "^9.9.1",
     "json-server": "^0.17.0",
     "lazysizes": "^5.3.2",
+    "lodash": "^4.17.21",
     "next": "12.2.3",
     "next-remove-imports": "^1.0.6",
     "pretty": "^2.0.0",

@@ -37,8 +37,8 @@ function MyApp({ Component, pageProps }) {
       ></ToastContainer>
       <ReactModal
         isOpen={isShowCode}
-        overlayClassName="bg-black bg-opacity-10 fixed inset-0 z-[99] flex items-center justify-center cursor-pointer"
-        className="max-w-2xl p-5 rounded-lg bg-slate-800 max-h-[90vh] overflow-y-auto w-full relative"
+        overlayClassName="bg-black bg-opacity-40 fixed inset-0 z-[99] flex items-center justify-center cursor-pointer"
+        className="max-w-2xl p-5 rounded-lg bg-slate-800 max-h-[80vh] overflow-y-auto w-full relative scrollbar-style"
         onRequestClose={() => setIsShowCode(false)}
       >
         <div

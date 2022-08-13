@@ -1,6 +1,6 @@
 // Editor
 body .w-tc-editor {
-  @apply font-normal w-full p-4 text-base text-slate-900 dark:text-white transition-all border border-transparent rounded-lg outline-none dark:border-slate-700 dark:bg-slate-900 focus:border-blue-500 resize-none min-h-[200px] max-h-[300px] overflow-y-auto border-slate-200 bg-white font-mono leading-loose;
+  @apply font-normal w-full p-4 text-base text-slate-900 dark:text-white transition-all border border-transparent rounded-lg outline-none dark:border-slate-700 dark:bg-slate-900 focus:border-blue-500 resize-none overflow-y-auto border-slate-200 bg-white font-mono leading-loose;
   overflow-y: auto !important;
   textarea {
     @apply placeholder:font-primary placeholder:font-medium;

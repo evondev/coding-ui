@@ -18,6 +18,7 @@ import useInputChange from "hooks/useInputChange";
 import DropdownItem from "components/dropdown/DropdownItem";
 import CardFilterDropdown from "./CardFilterDropdown";
 import useToggle from "hooks/useToggle";
+import { debounce } from "lodash";
 
 const CardManage = (props) => {
   const [filter, setFilter] = React.useState("");
@@ -36,7 +37,15 @@ const CardManage = (props) => {
     toggleStatus();
   };
   const { cards } = useFetchCards({ status, name, filter, count: 100 });
-
+  const resetSearch = () => {
+    setName("");
+    setStatus(null);
+    setFilter("");
+    setStatusText("");
+  };
+  const handleFilterByTitle = debounce((e) => {
+    setName(e.target.value);
+  }, 500);
   return (
     <div className="mt-10">
       <ButtonNew href="/manage/new-card"></ButtonNew>
@@ -44,13 +53,13 @@ const CardManage = (props) => {
         <div className="w-[200px]">
           <Input
             name="filter"
-            placeholder="Filter by name"
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Filter by title"
+            onChange={handleFilterByTitle}
           ></Input>
         </div>
         <div className="w-[200px]">
           <Dropdown
-            placeholder={statusText || "Filter by status"}
+            placeholder={statusText || "Status"}
             show={showStatus}
             onClick={toggleStatus}
           >
@@ -74,6 +83,9 @@ const CardManage = (props) => {
             placeholder={filter}
           ></CardFilterDropdown>
         </div>
+        <Button onClick={resetSearch} className="h-full p-2">
+          Reset
+        </Button>
       </div>
       <div className="table overflow-x-auto">
         <table className="w-full">
