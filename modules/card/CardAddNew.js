@@ -1,14 +1,10 @@
 import Button from "components/button/Button";
-import Card from "components/card/Card";
 import CodeEditorBlock from "components/CodeEditorBlock";
-import Dropdown from "components/dropdown/Dropdown";
 import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
-import Textarea from "components/textarea/Textarea";
 import { cardStatus } from "constant/global-constant";
-// const CodeEditor = dynamic(() => "@uiw/react-textarea-code-editor");
 import {
   addDoc,
   collection,
@@ -19,10 +15,12 @@ import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import CardAction from "./CardAction";
 import CardFilterDropdown from "./CardFilterDropdown";
 
 const CardAddNew = () => {
   const [filterList, setFilterList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
     title: "",
     filter: "",
@@ -36,6 +34,7 @@ const CardAddNew = () => {
       toast.error("Please fill all inputs");
       return;
     }
+    setLoading(true);
     const colRef = collection(db, "cards");
     try {
       addDoc(colRef, {
@@ -53,6 +52,7 @@ const CardAddNew = () => {
         htmlCode: "",
         cssCode: "",
       });
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -74,16 +74,7 @@ const CardAddNew = () => {
     toggle();
   };
   return (
-    <div className="max-w-3xl p-10 mx-auto">
-      <Label className="mb-5">Preview</Label>
-      <Card
-        title={values.title}
-        filter={values.filter}
-        htmlCode={values.htmlCode}
-        cssCode={values.cssCode}
-        preview
-      ></Card>
-      <div className="mb-10"></div>
+    <CardAction values={values}>
       <form onSubmit={handleAddNewCard} autoComplete="off">
         <div className="flex items-center gap-x-5">
           <FormGroup>
@@ -128,10 +119,12 @@ const CardAddNew = () => {
           ></CodeEditorBlock>
         </FormGroup>
         <div className="mt-10 text-center">
-          <Button type="submit">Add new card</Button>
+          <Button isLoading={loading} type="submit" className="w-[200px]">
+            Add new card
+          </Button>
         </div>
       </form>
-    </div>
+    </CardAction>
   );
 };
 

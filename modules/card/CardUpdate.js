@@ -4,7 +4,6 @@ import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
-import Textarea from "components/textarea/Textarea";
 import Toggle from "components/toggle/Toggle";
 import { cardStatus } from "constant/global-constant";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -17,6 +16,7 @@ import cssbeautify from "cssbeautify";
 
 import CardFilterDropdown from "./CardFilterDropdown";
 import Card from "components/card/Card";
+import CardAction from "./CardAction";
 
 const CardUpdate = ({ id }) => {
   const [values, setValues] = useState({
@@ -25,6 +25,7 @@ const CardUpdate = ({ id }) => {
     htmlCode: "",
     cssCode: "",
   });
+  const [loading, setLoading] = useState(false);
   const { onChange } = useInputChange(values, setValues);
   useEffect(() => {
     async function fetchData() {
@@ -47,6 +48,7 @@ const CardUpdate = ({ id }) => {
   const handleUpdateCard = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const docRef = doc(db, "cards", id);
       await updateDoc(docRef, {
         ...values,
@@ -54,6 +56,8 @@ const CardUpdate = ({ id }) => {
       toast.success("Card updated successfully");
     } catch (err) {
       toast.error(err.message);
+    } finally {
+      setLoading(false);
     }
   };
   const handleToggleStatus = () => {
@@ -74,25 +78,18 @@ const CardUpdate = ({ id }) => {
     toggle();
   };
   return (
-    <div className="max-w-3xl p-10 mx-auto">
-      <Label className="mb-5">Preview</Label>
-      <Card
-        title={values.title}
-        filter={values.filter}
-        htmlCode={values.htmlCode}
-        cssCode={values.cssCode}
-        preview
-      ></Card>
-      <div className="mb-10"></div>
+    <CardAction values={values}>
       <form onSubmit={handleUpdateCard} autoComplete="off">
-        <FormGroup>
-          <Label>Status</Label>
-          <Toggle
-            name="status"
-            on={values.status === cardStatus.APPROVED ? true : false}
-            onChange={handleToggleStatus}
-          ></Toggle>
-        </FormGroup>
+        <div className="flex items-start justify-end">
+          <FormGroup className="flex-none">
+            <Label>Status</Label>
+            <Toggle
+              name="status"
+              on={values.status === cardStatus.APPROVED ? true : false}
+              onChange={handleToggleStatus}
+            ></Toggle>
+          </FormGroup>
+        </div>
         <div className="flex items-center gap-x-5">
           <FormGroup>
             <Label>Title</Label>
@@ -115,6 +112,7 @@ const CardUpdate = ({ id }) => {
             ></CardFilterDropdown>
           </FormGroup>
         </div>
+
         <FormGroup>
           <Label>HTML</Label>
           <CodeEditorBlock
@@ -137,10 +135,12 @@ const CardUpdate = ({ id }) => {
         </FormGroup>
 
         <div className="mt-10 text-center">
-          <Button type="submit">Update card</Button>
+          <Button isLoading={loading} type="submit" className="w-[200px]">
+            Update card
+          </Button>
         </div>
       </form>
-    </div>
+    </CardAction>
   );
 };
 

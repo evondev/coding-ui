@@ -46,7 +46,6 @@
   .hidden-scroll::-webkit-scrollbar {
     display: none;
   }
-  input:invalid,
   input:invalid:focus {
     @apply border-primary;
   }
