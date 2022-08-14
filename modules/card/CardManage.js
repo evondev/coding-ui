@@ -144,7 +144,11 @@ const CardRow = ({ card }) => {
   };
   return (
     <tr>
-      <td>{card.title}</td>
+      <td>
+        <Link href={`/manage/update-card?id=${card.id}`}>
+          <a className="text-slate-900 dark:text-white">{card.title}</a>
+        </Link>
+      </td>
       <td className="capitalize">{card.filter}</td>
       <td>{renderStatus(card.status)}</td>
       <td>

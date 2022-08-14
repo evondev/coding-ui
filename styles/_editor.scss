@@ -1,5 +1,13 @@
 // Editor
 body .w-tc-editor {
+  --gradient-primary: linear-gradient(
+      244.98deg,
+      #fcb564 0.67%,
+      rgba(251, 111, 255, 0) 30.1%
+    ),
+    linear-gradient(66.56deg, #706ceb 0.07%, #ff65f2 82.88%);
+  --gradient-secondary: linear-gradient(245deg, #fcb564, #ff65f2);
+  --gradient-third: var(--gradient-primary);
   @apply font-normal w-full p-4 text-base text-slate-900 dark:text-white transition-all border border-transparent rounded-lg outline-none dark:border-slate-700 dark:bg-slate-900 focus:border-blue-500 resize-none overflow-y-auto border-slate-200 bg-white font-mono leading-loose;
   overflow-y: auto !important;
   textarea {
@@ -10,5 +18,79 @@ body .w-tc-editor {
   }
   code[class^="language-"].code-highlight {
     @apply block;
+  }
+  pre[class*="language-"] {
+    code[class*="language-css"] {
+      color: #706ceb;
+    }
+    .token.atrule,
+    .token.number,
+    .token.color,
+    .token.property,
+    .token.unit,
+    .token.function,
+    .token.pseudo-class,
+    .token.combinator,
+    .token.class {
+      color: transparent;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+    }
+    .token.number,
+    .token.color {
+      background-image: var(--gradient-third);
+    }
+    .token.property {
+      background-image: linear-gradient(
+        var(--gradient-dir2, to top),
+        #098dff,
+        #2cccff,
+        #2979ff
+      );
+    }
+    .token.pseudo-class,
+    .token.function,
+    .token.class {
+      background-image: linear-gradient(
+        to right top,
+        #4dd78a,
+        #20e3b2,
+        #a2de6a
+      );
+    }
+    .token.combinator,
+    .token.atrule,
+    .token.unit {
+      background-image: linear-gradient(to right bottom, #fc806c, #ff1bd1);
+    }
+    .token.tag {
+      & > .token.tag,
+      & > .token.attr-name,
+      .attr-value,
+      & > .punctuation:last-child,
+      .attr-equals {
+        color: transparent;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+      & > .token.attr-name {
+        background-image: linear-gradient(
+          to right top,
+          #4dd78a,
+          #20e3b2,
+          #a2de6a
+        );
+      }
+      & > .punctuation:last-child,
+      .attr-equals,
+      & > .token.tag {
+        background-image: linear-gradient(to right bottom, #fc806c, #ff1bd1);
+      }
+      .attr-value {
+        background-image: linear-gradient(to right, #ffb88c, #eac394);
+      }
+    }
   }
 }
