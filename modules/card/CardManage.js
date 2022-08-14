@@ -49,15 +49,15 @@ const CardManage = (props) => {
   return (
     <div className="mt-10">
       <ButtonNew href="/manage/new-card"></ButtonNew>
-      <div className="flex justify-end mb-10 gap-x-5">
-        <div className="w-[200px]">
+      <div className="grid flex-wrap grid-cols-2 gap-5 mb-10 lg:flex lg:justify-end">
+        <div className="w-full lg:w-[200px]">
           <Input
             name="filter"
             placeholder="Filter by title"
             onChange={handleFilterByTitle}
           ></Input>
         </div>
-        <div className="w-[200px]">
+        <div className="w-full lg:w-[200px]">
           <Dropdown
             placeholder={statusText || "Status"}
             show={showStatus}
@@ -75,7 +75,7 @@ const CardManage = (props) => {
             </DropdownItem>
           </Dropdown>
         </div>
-        <div className="w-[200px]">
+        <div className="w-full lg:w-[200px]">
           <CardFilterDropdown
             show={show}
             onClick={toggle}
@@ -83,7 +83,7 @@ const CardManage = (props) => {
             placeholder={filter}
           ></CardFilterDropdown>
         </div>
-        <Button onClick={resetSearch} className="h-full p-2">
+        <Button onClick={resetSearch} className="w-full h-full p-2 lg:w-auto">
           Reset
         </Button>
       </div>

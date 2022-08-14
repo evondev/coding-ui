@@ -4,31 +4,23 @@ import parse from "react-html-parser";
 import copyToClipBoard from "../../utils/copyToClipboard";
 import pretty from "pretty";
 import cssbeautify from "cssbeautify";
-import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import { IconEye, IconHeart } from "components/icons";
 import { globalStore } from "store/global-store";
 import shallow from "zustand/shallow";
-
 const CardStyles = styled.div`
   ${(props) => props.css}
 `;
+
 const Card = (props) => {
-  const { title, htmlCode, cssCode, filter } = props;
+  const { title, htmlCode, cssCode, filter, preview = false } = props;
   const [htmlSourceCode, setHtmlSourceCode] = useState(htmlCode);
   const [cssSourceCode, setCssSourceCode] = useState(cssCode);
-  const mountedRef = React.useRef(true);
 
   useEffect(() => {
-    mountedRef.current = true;
-    if (mountedRef.current) {
-      setHtmlSourceCode(htmlCode);
-      setCssSourceCode(cssCode);
-    }
-    return () => {
-      mountedRef.current = false;
-    };
-  }, [htmlCode, cssCode]);
+    setHtmlSourceCode(htmlCode);
+    setCssSourceCode(cssCode);
+  }, [htmlCode, cssCode, preview]);
   const { setIsShowCode, setHtmlCodeView, setCssCodeView } = globalStore(
     (state) => ({
       setIsShowCode: state.setIsShowCode,
@@ -62,7 +54,8 @@ const Card = (props) => {
           </ButtonAction> */}
         </div>
         <div className="pt-10 pb-5 my-5 card-ui">
-          <CardStyles css={cssSourceCode}>
+          <CardStyles css={!preview ? cssSourceCode : null}>
+            {preview && <style>{cssSourceCode}</style>}
             {htmlSourceCode && <>{parse(htmlSourceCode)}</>}
           </CardStyles>
         </div>
@@ -145,5 +138,6 @@ Card.propTypes = {
   filter: PropTypes.string.isRequired,
   htmlCode: PropTypes.string,
   cssCode: PropTypes.string,
+  preview: PropTypes.bool,
 };
 export default memo(Card);

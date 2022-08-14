@@ -1,4 +1,5 @@
 import Button from "components/button/Button";
+import Card from "components/card/Card";
 import CodeEditorBlock from "components/CodeEditorBlock";
 import Dropdown from "components/dropdown/Dropdown";
 import { db } from "components/firebase/firebase-config";
@@ -73,12 +74,17 @@ const CardAddNew = () => {
     toggle();
   };
   return (
-    <div>
-      <form
-        className="max-w-3xl p-10 mx-auto"
-        onSubmit={handleAddNewCard}
-        autoComplete="off"
-      >
+    <div className="max-w-3xl p-10 mx-auto">
+      <Label className="mb-5">Preview</Label>
+      <Card
+        title={values.title}
+        filter={values.filter}
+        htmlCode={values.htmlCode}
+        cssCode={values.cssCode}
+        preview
+      ></Card>
+      <div className="mb-10"></div>
+      <form onSubmit={handleAddNewCard} autoComplete="off">
         <div className="flex items-center gap-x-5">
           <FormGroup>
             <Label>Title</Label>

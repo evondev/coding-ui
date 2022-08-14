@@ -9,7 +9,7 @@ const PageNotFound = () => {
         <title>Oops! Page not found</title>
       </Head>
       <Link href="/">
-        <a className="absolute z-10 flex items-center justify-center p-4 bg-blue-500 rounded-lg cursor-pointer top-5 left-5 gap-x-3">
+        <a className="absolute z-10 flex items-center justify-center p-4 text-white bg-blue-500 rounded-lg cursor-pointer top-5 left-5 gap-x-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6"

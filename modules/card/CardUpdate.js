@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import cssbeautify from "cssbeautify";
 
 import CardFilterDropdown from "./CardFilterDropdown";
+import Card from "components/card/Card";
 
 const CardUpdate = ({ id }) => {
   const [values, setValues] = useState({
@@ -73,12 +74,17 @@ const CardUpdate = ({ id }) => {
     toggle();
   };
   return (
-    <div>
-      <form
-        className="max-w-3xl p-10 mx-auto"
-        onSubmit={handleUpdateCard}
-        autoComplete="off"
-      >
+    <div className="max-w-3xl p-10 mx-auto">
+      <Label className="mb-5">Preview</Label>
+      <Card
+        title={values.title}
+        filter={values.filter}
+        htmlCode={values.htmlCode}
+        cssCode={values.cssCode}
+        preview
+      ></Card>
+      <div className="mb-10"></div>
+      <form onSubmit={handleUpdateCard} autoComplete="off">
         <FormGroup>
           <Label>Status</Label>
           <Toggle

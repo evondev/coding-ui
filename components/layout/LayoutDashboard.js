@@ -15,7 +15,7 @@ const LayoutDashboard = ({ children, heading = "" }) => {
   if (loading) return null;
   if (!userInfo?.email) return <PageNotFound></PageNotFound>;
   return (
-    <div className="min-h-screen grid grid-cols-[300px,minmax(0,1fr)]">
+    <div className="min-h-screen grid lg:grid-cols-[300px,minmax(0,1fr)]">
       <Head>
         <title>CodingUI - {heading}</title>
       </Head>
