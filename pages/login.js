@@ -42,7 +42,7 @@ const LoginPage = () => {
   };
   return (
     <LayoutMain title="Login Page">
-      <div className="max-w-2xl mx-auto rounded-lg dark:border-slate-800">
+      <div className="max-w-2xl mx-auto rounded-lg border-slate-800">
         <form onSubmit={handleLogin} autoComplete="off">
           <FormGroup>
             <Label>Email</Label>

@@ -13,7 +13,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply dark:bg-slate-900 font-primary text-slate-900 dark:text-white pb-10 font-light bg-grayf5;
+    @apply bg-slate-900 font-primary  text-white pb-10 font-light;
   }
   .scrollbar-style::-webkit-scrollbar,
   .w-tc-editor::-webkit-scrollbar,

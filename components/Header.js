@@ -5,7 +5,7 @@ import React from "react";
 const Header = () => {
   const { userInfo } = useAuth();
   return (
-    <div className="py-5 border-b l-container border-slate-200 dark:border-slate-800">
+    <div className="py-5 border-b l-container border-slate-800">
       <div className="flex items-center justify-between">
         <Link href="/">
           <a className="inline-flex items-center font-bold gap-x-3">

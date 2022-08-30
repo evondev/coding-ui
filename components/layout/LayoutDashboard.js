@@ -21,7 +21,7 @@ const LayoutDashboard = ({ children, heading = "" }) => {
       </Head>
       <Sidebar></Sidebar>
       <div className="relative p-10" aria-label="main">
-        <h1 className="inline-flex items-center mb-10 text-3xl font-bold dark:text-white gap-x-3">
+        <h1 className="inline-flex items-center mb-10 text-3xl font-bold text-white gap-x-3">
           <div className="w-10 h-1 bg-blue-500"></div>
           <span>{heading}</span>
         </h1>

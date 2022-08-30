@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div
       aria-label="sidebar"
-      className="relative hidden p-5 border-r border-slate-200 dark:border-slate-800 lg:block"
+      className="relative hidden p-5 border-r border-slate-800 lg:block"
     >
       <Link href="/">
         <a className="flex items-center justify-start px-4 mt-5 mb-10 text-sm font-bold gap-x-3">

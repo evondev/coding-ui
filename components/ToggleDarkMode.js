@@ -50,9 +50,7 @@ const ToggleDarkMode = (props) => {
           </svg>
         )}
       </div>
-      <span className="text-slate-900 dark:text-white">
-        {darkMode ? "DarkMode" : "LightMode"}
-      </span>
+      <span className="text-white">{darkMode ? "DarkMode" : "LightMode"}</span>
     </label>
   );
 };

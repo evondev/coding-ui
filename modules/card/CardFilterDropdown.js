@@ -28,7 +28,7 @@ const CardFilterDropdown = ({
       {filterList.map((item) => (
         <div
           key={item.name}
-          className="p-3 capitalize rounded cursor-pointer hover:bg-blue-50 hover:text-blue-500 dark:hover:bg-slate-800"
+          className="p-3 capitalize rounded cursor-pointer hover:text-blue-500 hover:bg-slate-800"
           onClick={() => onClickItem(item.name)}
         >
           {item.name}

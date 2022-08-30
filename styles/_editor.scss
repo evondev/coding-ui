@@ -8,7 +8,7 @@ body .w-tc-editor {
     linear-gradient(66.56deg, #706ceb 0.07%, #ff65f2 82.88%);
   --gradient-secondary: linear-gradient(245deg, #fcb564, #ff65f2);
   --gradient-third: var(--gradient-primary);
-  @apply font-normal w-full p-4 text-base text-slate-900 dark:text-white transition-all border border-transparent rounded-lg outline-none dark:border-slate-700 dark:bg-slate-900 focus:border-blue-500 resize-none overflow-y-auto border-slate-200 bg-white font-mono leading-loose;
+  @apply font-normal w-full p-4 text-base text-white transition-all border border-transparent rounded-lg outline-none border-slate-700 bg-slate-900 focus:border-blue-500 resize-none overflow-y-auto font-mono leading-loose;
   overflow-y: auto !important;
   textarea {
     @apply placeholder:font-primary placeholder:font-medium;

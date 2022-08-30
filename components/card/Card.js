@@ -50,10 +50,10 @@ const Card = (props) => {
     <>
       <div
         data-filter={filter}
-        className="relative flex flex-col p-5 border rounded border-slate-200 dark:border-slate-800 card"
+        className="relative flex flex-col p-5 border rounded border-slate-800 card"
       >
         <div className="flex items-center justify-between">
-          <h4 className="flex items-center text-sm font-normal gap-x-2 text-slate-900 dark:text-white">
+          <h4 className="flex items-center text-sm font-normal text-white gap-x-2">
             {author && (
               <>
                 <svg
@@ -88,7 +88,7 @@ const Card = (props) => {
           </CardStyles>
         </div>
         <div className="flex items-center justify-between mt-auto card-footer gap-x-2">
-          <h3 className="text-sm font-semibold card-title text-slate-900 dark:text-white">
+          <h3 className="text-sm font-semibold text-white card-title">
             {title}
           </h3>
           <div
@@ -126,7 +126,7 @@ const Card = (props) => {
 function ButtonAction({ children, onClick }) {
   return (
     <button
-      className="flex items-center justify-center w-10 h-10 p-2 rounded-full dark:bg-black bg-opacity-40 dark:text-slate-400 text-slate-900 bg-slate-400 hover:text-white"
+      className="flex items-center justify-center w-10 h-10 p-2 bg-black rounded-full bg-opacity-40 text-slate-400 hover:text-white"
       onClick={onClick}
     >
       {children}
