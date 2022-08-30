@@ -15,6 +15,7 @@ const CardAction = ({ children, values = {} }) => {
             filter={values.filter}
             htmlCode={values.htmlCode}
             cssCode={values.cssCode}
+            author={values.author}
             preview
           ></Card>
         </FormGroup>

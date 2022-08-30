@@ -24,6 +24,7 @@ const CardUpdate = ({ id }) => {
     filter: "",
     htmlCode: "",
     cssCode: "",
+    author: "",
   });
   const [loading, setLoading] = useState(false);
   const { onChange } = useInputChange(values, setValues);
@@ -110,6 +111,19 @@ const CardUpdate = ({ id }) => {
               onClickItem={handleSelectFilter}
               show={showFilter}
             ></CardFilterDropdown>
+          </FormGroup>
+        </div>
+        <div className="flex items-center gap-x-5">
+          <FormGroup>
+            <Label>Author Name</Label>
+            <Input
+              name="author"
+              type="text"
+              placeholder="Enter the author name"
+              onChange={onChange}
+              required
+              value={values.author}
+            />
           </FormGroup>
         </div>
 

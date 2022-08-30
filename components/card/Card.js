@@ -13,7 +13,14 @@ const CardStyles = styled.div`
 `;
 
 const Card = (props) => {
-  const { title, htmlCode, cssCode, filter, preview = false } = props;
+  const {
+    title,
+    htmlCode,
+    cssCode,
+    filter,
+    author = null,
+    preview = false,
+  } = props;
   const [htmlSourceCode, setHtmlSourceCode] = useState(htmlCode);
   const [cssSourceCode, setCssSourceCode] = useState(cssCode);
 
@@ -45,15 +52,36 @@ const Card = (props) => {
         data-filter={filter}
         className="relative flex flex-col p-5 border rounded border-slate-200 dark:border-slate-800 card"
       >
-        <div className="absolute flex items-center right-2 top-2 gap-x-2">
-          <ButtonAction onClick={handleViewCode}>
-            <IconEye></IconEye>
-          </ButtonAction>
-          {/* <ButtonAction onClick={handleViewCode}>
+        <div className="flex items-center justify-between">
+          <h4 className="flex items-center text-sm font-normal gap-x-2 text-slate-900 dark:text-white">
+            {author && (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <strong className="text-third">{author}</strong>
+              </>
+            )}
+          </h4>
+          <div className="flex items-center gap-x-2">
+            <ButtonAction onClick={handleViewCode}>
+              <IconEye></IconEye>
+            </ButtonAction>
+            {/* <ButtonAction onClick={handleViewCode}>
             <IconHeart></IconHeart>
           </ButtonAction> */}
+          </div>
         </div>
-        <div className="pt-10 pb-5 my-5 card-ui">
+        <div className="py-10 card-ui">
           <CardStyles css={!preview ? cssSourceCode : null}>
             {preview && <style>{cssSourceCode}</style>}
             {htmlSourceCode && <>{parse(htmlSourceCode)}</>}

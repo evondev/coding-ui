@@ -26,6 +26,7 @@ const CardAddNew = () => {
     filter: "",
     htmlCode: "",
     cssCode: "",
+    author: "",
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
@@ -51,6 +52,7 @@ const CardAddNew = () => {
         filter: "",
         htmlCode: "",
         cssCode: "",
+        author: "",
       });
       setLoading(false);
     }
@@ -96,6 +98,19 @@ const CardAddNew = () => {
               onClickItem={handleSelectFilter}
               show={showFilter}
             ></CardFilterDropdown>
+          </FormGroup>
+        </div>
+        <div className="flex items-center gap-x-5">
+          <FormGroup>
+            <Label>Author Name</Label>
+            <Input
+              name="author"
+              type="text"
+              placeholder="Enter the author name"
+              onChange={onChange}
+              required
+              value={values.author}
+            />
           </FormGroup>
         </div>
         <FormGroup>
