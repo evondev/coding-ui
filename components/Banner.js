@@ -17,7 +17,7 @@ const Banner = () => {
       </h1>
       <div className="flex flex-col justify-center gap-5 mb-10 sm:items-center sm:flex-row">
         <a
-          href="#"
+          href="https://github.com/evondev/coding-ui"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-slate-800 rounded-lg h-[60px] w-full sm:w-[230px] button-effect"

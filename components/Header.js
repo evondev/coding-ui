@@ -31,11 +31,14 @@ const Header = () => {
           </Link>
         )}
         {!userInfo?.email && (
-          <Link href="/login">
-            <a className="flex items-center px-6 py-3 text-sm font-bold text-white rounded-lg bg-gradient-secondary">
-              Login to account
-            </a>
-          </Link>
+          <a
+            href="https://evondev.com/donate"
+            target="_blank"
+            className="flex items-center px-6 py-3 text-sm font-bold text-white rounded-lg bg-gradient-primary"
+            rel="noreferrer"
+          >
+            Donate me ❤️
+          </a>
         )}
       </div>
     </div>
