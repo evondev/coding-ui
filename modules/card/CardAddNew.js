@@ -28,7 +28,7 @@ const CardAddNew = () => {
     filter: "",
     htmlCode: "",
     cssCode: "",
-    author: "",
+    // author: "",
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
@@ -39,19 +39,20 @@ const CardAddNew = () => {
     }
     setLoading(true);
     const colRef = collection(db, "cards");
-    const userRefWithCards = collection(db, "users", userInfo.uid, "cards");
+    // const userRefWithCards = collection(db, "users", userInfo.uid, "cards");
     try {
-      // addDoc(colRef, {
+      addDoc(colRef, {
+        ...values,
+        status: cardStatus.REJECTED,
+        createdAt: serverTimestamp(),
+        userId: userInfo.uid,
+      });
+      // addDoc(userRefWithCards, {
       //   ...values,
-      //   status: cardStatus.APPROVED,
+      //   status: cardStatus.REJECTED,
       //   createdAt: serverTimestamp(),
       // });
-      addDoc(userRefWithCards, {
-        ...values,
-        status: cardStatus.APPROVED,
-        createdAt: serverTimestamp(),
-      });
-      toast.success("Card added successfully");
+      toast.success("Card added successfully and waiting for admin approval");
     } catch (err) {
       toast.error(err.message);
     } finally {
@@ -108,7 +109,7 @@ const CardAddNew = () => {
             ></CardFilterDropdown>
           </FormGroup>
         </div>
-        <div className="flex items-center gap-x-5">
+        {/* <div className="flex items-center gap-x-5">
           <FormGroup>
             <Label>Author Name</Label>
             <Input
@@ -116,11 +117,10 @@ const CardAddNew = () => {
               type="text"
               placeholder="Enter the author name"
               onChange={onChange}
-              required
               value={values.author}
             />
           </FormGroup>
-        </div>
+        </div> */}
         <FormGroup>
           <Label>HTML</Label>
           <CodeEditorBlock

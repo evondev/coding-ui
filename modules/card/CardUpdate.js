@@ -5,7 +5,7 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Toggle from "components/toggle/Toggle";
-import { cardStatus } from "constant/global-constant";
+import { cardStatus, userRole } from "constant/global-constant";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
@@ -17,6 +17,7 @@ import cssbeautify from "cssbeautify";
 import CardFilterDropdown from "./CardFilterDropdown";
 import Card from "components/card/Card";
 import CardAction from "./CardAction";
+import { useAuth } from "contexts/auth-context";
 
 const CardUpdate = ({ id }) => {
   const [values, setValues] = useState({
@@ -32,6 +33,7 @@ const CardUpdate = ({ id }) => {
     async function fetchData() {
       const docRef = doc(db, "cards", id);
       const docSnap = await getDoc(docRef);
+      console.log("fetchData ~ docSnap", docSnap.data());
       if (docSnap.exists()) {
         setValues({
           ...docSnap.data(),
@@ -78,19 +80,22 @@ const CardUpdate = ({ id }) => {
     });
     toggle();
   };
+  const { userInfo } = useAuth();
   return (
     <CardAction values={values}>
       <form onSubmit={handleUpdateCard} autoComplete="off">
-        <div className="flex items-start justify-end">
-          <FormGroup className="flex-none">
-            <Label>Status</Label>
-            <Toggle
-              name="status"
-              on={values.status === cardStatus.APPROVED ? true : false}
-              onChange={handleToggleStatus}
-            ></Toggle>
-          </FormGroup>
-        </div>
+        {userInfo?.role === userRole.ADMIN && (
+          <div className="flex items-start justify-end">
+            <FormGroup className="flex-none">
+              <Label>Status</Label>
+              <Toggle
+                name="status"
+                on={values.status === cardStatus.APPROVED ? true : false}
+                onChange={handleToggleStatus}
+              ></Toggle>
+            </FormGroup>
+          </div>
+        )}
         <div className="flex items-center gap-x-5">
           <FormGroup>
             <Label>Title</Label>

@@ -28,7 +28,7 @@ export default function useFetchCards({
         setLoading(true);
         let colRef = collection(db, "cards");
         if (userInfo?.role === userRole.USER) {
-          colRef = query(colRef, where("userId", "==", userInfo?.uid));
+          colRef = query(colRef, where("userId", "==", userInfo.uid));
         }
         let queries = query(colRef, orderBy("createdAt", "desc"));
         if (status)

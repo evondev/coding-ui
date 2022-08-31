@@ -5,7 +5,7 @@ import LabelStatus from "components/label/LabelStatus";
 import ButtonAction from "components/button/ButtonAction";
 import Button from "components/button/Button";
 import useFetchCards from "hooks/useFetchCards";
-import { cardStatus } from "constant/global-constant";
+import { cardStatus, userRole } from "constant/global-constant";
 import { IconEdit, IconTrash } from "components/icons";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "components/firebase/firebase-config";
@@ -115,6 +115,7 @@ const CardManage = (props) => {
 };
 
 const CardRow = ({ card }) => {
+  const { userInfo } = useAuth();
   const renderStatus = (status) => {
     switch (status) {
       case cardStatus.APPROVED:
@@ -164,12 +165,14 @@ const CardRow = ({ card }) => {
               </ButtonAction>
             </a>
           </Link>
-          <ButtonAction
-            className="hover:text-red-500 hover:border-red-500"
-            onClick={() => handleDeleteCard(card.id)}
-          >
-            <IconTrash></IconTrash>
-          </ButtonAction>
+          {userInfo?.role === userRole.ADMIN && (
+            <ButtonAction
+              className="hover:text-red-500 hover:border-red-500"
+              onClick={() => handleDeleteCard(card.id)}
+            >
+              <IconTrash></IconTrash>
+            </ButtonAction>
+          )}
         </div>
       </td>
     </tr>
