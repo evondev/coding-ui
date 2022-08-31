@@ -1,4 +1,6 @@
 import { db } from "components/firebase/firebase-config";
+import { userRole } from "constant/global-constant";
+import { useAuth } from "contexts/auth-context";
 import {
   collection,
   limit,
@@ -16,6 +18,8 @@ export default function useFetchCards({
   filter = "",
   count = 100,
 }) {
+  const { userInfo } = useAuth();
+  console.log("userInfo", userInfo);
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
   useEffect(() => {
@@ -23,6 +27,9 @@ export default function useFetchCards({
       try {
         setLoading(true);
         let colRef = collection(db, "cards");
+        if (userInfo?.role === userRole.USER) {
+          colRef = query(colRef, where("userId", "==", userInfo?.uid));
+        }
         let queries = query(colRef, orderBy("createdAt", "desc"));
         if (status)
           queries = query(queries, where("status", "==", status), limit(count));

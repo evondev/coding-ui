@@ -4,7 +4,7 @@ import React from "react";
 
 const CardManagePage = () => {
   return (
-    <LayoutDashboard heading="Manage Card UI">
+    <LayoutDashboard heading="Manage Card UI" hasPermission>
       <CardManage></CardManage>
     </LayoutDashboard>
   );

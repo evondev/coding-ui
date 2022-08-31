@@ -19,6 +19,7 @@ import DropdownItem from "components/dropdown/DropdownItem";
 import CardFilterDropdown from "./CardFilterDropdown";
 import useToggle from "hooks/useToggle";
 import { debounce } from "lodash";
+import { useAuth } from "contexts/auth-context";
 
 const CardManage = (props) => {
   const [filter, setFilter] = React.useState("");
@@ -106,9 +107,9 @@ const CardManage = (props) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-10 text-center">
+      {/* <div className="mt-10 text-center">
         <div className="cursor-pointer text-slate-400">Load more...</div>
-      </div>
+      </div> */}
     </div>
   );
 };

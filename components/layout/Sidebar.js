@@ -1,11 +1,15 @@
+import { auth } from "components/firebase/firebase-config";
 import ToggleDarkMode from "components/ToggleDarkMode";
 import { menus } from "constant/global-constant";
+import { signOut } from "firebase/auth";
 import Link from "next/link";
 import React, { useState } from "react";
 
 const Sidebar = () => {
   const [isDarkMode, setIsDarkMode] = useState(true);
-
+  const handleSignOut = () => {
+    signOut(auth);
+  };
   return (
     <div
       aria-label="sidebar"
@@ -28,6 +32,30 @@ const Sidebar = () => {
             </Link>
           </li>
         ))}
+        <li>
+          <button
+            className="flex items-center px-4 py-3 rounded-lg gap-x-3 hover:bg-blue-500 hover:text-white"
+            onClick={handleSignOut}
+          >
+            <span className="w-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+            </span>
+            <span>Logout</span>
+          </button>
+        </li>
       </ul>
       <div className="absolute bottom-0 flex items-center w-full pb-5 gap-x-2">
         {/* <ToggleDarkMode

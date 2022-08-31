@@ -5,7 +5,7 @@ import PageNotFound from "pages/404";
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
-const LayoutDashboard = ({ children, heading = "" }) => {
+const LayoutDashboard = ({ children, heading = "", hasPermission = false }) => {
   const { userInfo, loading } = useAuth();
   // const router = useRouter();
   // useEffect(() => {
@@ -13,7 +13,7 @@ const LayoutDashboard = ({ children, heading = "" }) => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [userInfo]);
   if (loading) return null;
-  if (!userInfo?.email) return <PageNotFound></PageNotFound>;
+  if (!userInfo?.email || !hasPermission) return <PageNotFound></PageNotFound>;
   return (
     <div className="min-h-screen grid lg:grid-cols-[300px,minmax(0,1fr)]">
       <Head>

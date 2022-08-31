@@ -5,7 +5,7 @@ import CardAddNew from "modules/card/CardAddNew";
 
 const AddNewCardPage = () => {
   return (
-    <LayoutDashboard heading="Add new Card UI">
+    <LayoutDashboard heading="Add new Card UI" hasPermission>
       <CardAddNew></CardAddNew>
     </LayoutDashboard>
   );

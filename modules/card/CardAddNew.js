@@ -5,6 +5,7 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import { cardStatus } from "constant/global-constant";
+import { useAuth } from "contexts/auth-context";
 import {
   addDoc,
   collection,
@@ -19,6 +20,7 @@ import CardAction from "./CardAction";
 import CardFilterDropdown from "./CardFilterDropdown";
 
 const CardAddNew = () => {
+  const { userInfo } = useAuth();
   const [filterList, setFilterList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
@@ -37,8 +39,14 @@ const CardAddNew = () => {
     }
     setLoading(true);
     const colRef = collection(db, "cards");
+    const userRefWithCards = collection(db, "users", userInfo.uid, "cards");
     try {
-      addDoc(colRef, {
+      // addDoc(colRef, {
+      //   ...values,
+      //   status: cardStatus.APPROVED,
+      //   createdAt: serverTimestamp(),
+      // });
+      addDoc(userRefWithCards, {
         ...values,
         status: cardStatus.APPROVED,
         createdAt: serverTimestamp(),

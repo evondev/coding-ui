@@ -114,3 +114,12 @@ export const filterStatus = {
   APPROVED: true,
   REJECTED: false,
 };
+export const userStatus = {
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
+};
+export const userRole = {
+  USER: "USER",
+  MOD: "MOD",
+  ADMIN: "ADMIN",
+};
