@@ -13,11 +13,8 @@ const LayoutDashboard = ({
   back = "",
 }) => {
   const { userInfo, loading } = useAuth();
-  // const router = useRouter();
-  // useEffect(() => {
-  //   if (!userInfo?.email) router.push("/login");
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [userInfo]);
+  const router = useRouter();
+
   if (loading) return null;
   if (!userInfo?.email || !hasPermission) return <PageNotFound></PageNotFound>;
   return (

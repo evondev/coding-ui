@@ -84,7 +84,10 @@ const CardManage = (props) => {
             placeholder={filter}
           ></CardFilterDropdown>
         </div>
-        <Button onClick={resetSearch} className="w-full h-full p-2 lg:w-auto">
+        <Button
+          onClick={resetSearch}
+          className="w-full h-full p-2 lg:w-auto bg-slate-700"
+        >
           Reset
         </Button>
       </div>
@@ -113,9 +116,6 @@ const CardManage = (props) => {
           </tbody>
         </table>
       </div>
-      {/* <div className="mt-10 text-center">
-        <div className="cursor-pointer text-slate-400">Load more...</div>
-      </div> */}
     </div>
   );
 };
