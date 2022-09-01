@@ -101,6 +101,11 @@ const CardManage = (props) => {
             </tr>
           </thead>
           <tbody>
+            {cards.length === 0 && (
+              <tr>
+                <td colSpan={6}>No data</td>
+              </tr>
+            )}
             {cards.length > 0 &&
               cards.map((card) => (
                 <CardRow key={card.title} card={card}></CardRow>

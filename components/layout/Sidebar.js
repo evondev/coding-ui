@@ -3,6 +3,7 @@ import ToggleDarkMode from "components/ToggleDarkMode";
 import { menus } from "constant/global-constant";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -12,6 +13,8 @@ const Sidebar = () => {
       toast.success("Sign out successfully");
     });
   };
+  const router = useRouter();
+  const currentRoute = router.pathname;
   return (
     <div
       aria-label="sidebar"
@@ -27,7 +30,11 @@ const Sidebar = () => {
         {menus.map((menu, index) => (
           <li key={menu.title}>
             <Link href={menu.link}>
-              <a className="flex items-center px-4 py-3 rounded-lg gap-x-3 hover:bg-blue-500 hover:text-white">
+              <a
+                className={`flex items-center px-4 py-3 rounded-lg gap-x-3  hover:text-blue-500 ${
+                  currentRoute === menu.link ? "text-blue-500" : ""
+                }`}
+              >
                 <span className="w-5">{menu.icon}</span>
                 <span>{menu.title}</span>
               </a>
@@ -36,7 +43,7 @@ const Sidebar = () => {
         ))}
         <li>
           <button
-            className="flex items-center px-4 py-3 rounded-lg gap-x-3 hover:bg-blue-500 hover:text-white"
+            className="flex items-center w-full px-4 py-3 rounded-lg gap-x-3 hover:text-blue-500"
             onClick={handleSignOut}
           >
             <span className="w-5">

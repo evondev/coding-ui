@@ -24,7 +24,7 @@ const Header = () => {
               <p>
                 <span>Hello,</span>
                 <strong className="ml-1 font-bold text-transparent bg-clip-text bg-gradient-primary">
-                  User
+                  {userInfo?.fullname || "user"}
                 </strong>
               </p>
             </a>

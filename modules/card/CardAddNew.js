@@ -28,11 +28,13 @@ const CardAddNew = () => {
     filter: "",
     htmlCode: "",
     cssCode: "",
-    // author: "",
+    author: "",
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
-    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    const isAllInputFilled = Object.values(values).every((item) => {
+      return item !== "" && item !== "author";
+    });
     if (!isAllInputFilled) {
       toast.error("Please fill all inputs");
       return;
@@ -42,12 +44,11 @@ const CardAddNew = () => {
     try {
       addDoc(colRef, {
         ...values,
-        status: cardStatus.REJECTED,
+        status: cardStatus.PENDING,
         createdAt: serverTimestamp(),
-        userId: userInfo.uid,
-        user: {
-          ...userInfo,
-        },
+        userId: userInfo?.uid,
+        userFullname: userInfo?.fullname,
+        userEmailAddress: userInfo?.email,
       });
       toast.success("Card added successfully and waiting for admin approval");
     } catch (err) {
@@ -106,18 +107,7 @@ const CardAddNew = () => {
             ></CardFilterDropdown>
           </FormGroup>
         </div>
-        {/* <div className="flex items-center gap-x-5">
-          <FormGroup>
-            <Label>Author Name</Label>
-            <Input
-              name="author"
-              type="text"
-              placeholder="Enter the author name"
-              onChange={onChange}
-              value={values.author}
-            />
-          </FormGroup>
-        </div> */}
+
         <FormGroup>
           <Label>HTML</Label>
           <CodeEditorBlock
@@ -138,6 +128,18 @@ const CardAddNew = () => {
             name="cssCode"
           ></CodeEditorBlock>
         </FormGroup>
+        <div className="flex items-center gap-x-5">
+          <FormGroup>
+            <Label>Author(credit)</Label>
+            <Input
+              name="author"
+              type="text"
+              placeholder="Enter the author(credit)"
+              onChange={onChange}
+              value={values.author}
+            />
+          </FormGroup>
+        </div>
         <div className="mt-10 text-center">
           <Button isLoading={loading} type="submit" className="w-[200px]">
             Add new card
