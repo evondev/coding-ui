@@ -28,24 +28,24 @@ export const menus = [
     ),
     link: "/manage/cards",
   },
-  // {
-  //   title: "Users",
-  //   icon: (
-  //     <svg
-  //       xmlns="http://www.w3.org/2000/svg"
-  //       className="w-5 h-5"
-  //       viewBox="0 0 20 20"
-  //       fill="currentColor"
-  //     >
-  //       <path
-  //         fillRule="evenodd"
-  //         d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-  //         clipRule="evenodd"
-  //       />
-  //     </svg>
-  //   ),
-  //   link: "/manage/users",
-  // },
+  {
+    title: "Users",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-5 h-5"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+    link: "/manage/users",
+  },
   {
     title: "Filters",
     icon: (
@@ -82,33 +82,11 @@ export const menus = [
   //   ),
   //   link: "/manage/settings",
   // },
-  {
-    title: "Liked",
-    icon: <IconHeart></IconHeart>,
-    link: "/liked",
-  },
-  {
-    title: "Profile",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-5 h-5"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-    link: "/profile",
-  },
 ];
 export const cardStatus = {
   APPROVED: 1,
-  REJECTED: 2,
+  PENDING: 2,
+  REJECTED: 3,
 };
 export const filterStatus = {
   APPROVED: true,

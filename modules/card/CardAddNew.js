@@ -39,19 +39,16 @@ const CardAddNew = () => {
     }
     setLoading(true);
     const colRef = collection(db, "cards");
-    // const userRefWithCards = collection(db, "users", userInfo.uid, "cards");
     try {
       addDoc(colRef, {
         ...values,
         status: cardStatus.REJECTED,
         createdAt: serverTimestamp(),
         userId: userInfo.uid,
+        user: {
+          ...userInfo,
+        },
       });
-      // addDoc(userRefWithCards, {
-      //   ...values,
-      //   status: cardStatus.REJECTED,
-      //   createdAt: serverTimestamp(),
-      // });
       toast.success("Card added successfully and waiting for admin approval");
     } catch (err) {
       toast.error(err.message);

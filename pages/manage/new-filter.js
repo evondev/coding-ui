@@ -11,6 +11,7 @@ const AddFilter = () => {
     <LayoutDashboard
       heading="Add new filter"
       hasPermission={userInfo?.role === userRole.ADMIN}
+      back="/manage/filters"
     >
       <FilterAddNew></FilterAddNew>
     </LayoutDashboard>

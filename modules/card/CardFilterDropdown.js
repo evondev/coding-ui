@@ -1,6 +1,7 @@
 import Dropdown from "components/dropdown/Dropdown";
 import { db } from "components/firebase/firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { filterStatus } from "constant/global-constant";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
 const CardFilterDropdown = ({
@@ -12,7 +13,8 @@ const CardFilterDropdown = ({
   const [filterList, setFilterList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const colRef = collection(db, "filters");
+      let colRef = collection(db, "filters");
+      colRef = query(colRef, where("status", "==", filterStatus.APPROVED));
       const snapshot = await getDocs(colRef);
       const data = snapshot.docs.map((doc) => doc.data());
       setFilterList(data);

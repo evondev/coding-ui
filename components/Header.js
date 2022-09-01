@@ -31,11 +31,18 @@ const Header = () => {
           </Link>
         )}
         {!userInfo?.email && (
-          <Link href="/signup">
-            <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg bg-gradient-primary">
-              Contribute your ideas
-            </a>
-          </Link>
+          <div className="flex items-center gap-x-3">
+            <Link href="/signup">
+              <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg">
+                Sign up
+              </a>
+            </Link>
+            <Link href="/login">
+              <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg bg-gradient-secondary">
+                Login
+              </a>
+            </Link>
+          </div>
         )}
       </div>
     </div>

@@ -4,11 +4,13 @@ import { menus } from "constant/global-constant";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const handleSignOut = () => {
-    signOut(auth);
+    signOut(auth).then(() => {
+      toast.success("Sign out successfully");
+    });
   };
   return (
     <div

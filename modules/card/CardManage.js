@@ -96,6 +96,7 @@ const CardManage = (props) => {
               <th>Filter</th>
               <th>Status</th>
               <th>CreatedAt</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -120,6 +121,8 @@ const CardRow = ({ card }) => {
     switch (status) {
       case cardStatus.APPROVED:
         return <LabelStatus className="bg-green-500">Approved</LabelStatus>;
+      case cardStatus.PENDING:
+        return <LabelStatus className="bg-orange-500">Pending</LabelStatus>;
 
       default:
         return <LabelStatus className="bg-red-500">Rejected</LabelStatus>;
@@ -156,6 +159,7 @@ const CardRow = ({ card }) => {
       <td>
         {new Date(card.createdAt?.seconds * 1000).toLocaleDateString("vi-VI")}
       </td>
+      <td></td>
       <td>
         <div className="flex items-center gap-x-5">
           <Link href={`/manage/update-card?id=${card.id}`}>

@@ -13,7 +13,8 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-slate-900 font-primary  text-white pb-10 font-light;
+    @apply bg-slate-900 font-primary  text-white pb-10 font-light mx-auto;
+    max-width: 1920px;
   }
   .scrollbar-style::-webkit-scrollbar,
   .w-tc-editor::-webkit-scrollbar,
