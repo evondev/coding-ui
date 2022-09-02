@@ -6,7 +6,7 @@ import LabelStatus from "components/label/LabelStatus";
 import LayoutDashboard from "components/layout/LayoutDashboard";
 import { userRole, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import useFetchMembers from "hooks/useFetchMembers";
 import Link from "next/link";
 import React from "react";
@@ -65,12 +65,38 @@ function UserItem({ member }) {
       toast.error("Delete user failed");
     }
   };
+  const handleUpdateStatus = async (status) => {
+    try {
+      const docRef = doc(db, "users", member.id);
+      await updateDoc(docRef, {
+        status,
+      });
+      toast.success("Update status successfully");
+    } catch (err) {
+      console.log(err);
+      toast.error("Update status failed");
+    }
+  };
   const renderStatus = (status) => {
     switch (status) {
       case userStatus.ACTIVE:
-        return <LabelStatus className="bg-green-500">Active</LabelStatus>;
+        return (
+          <LabelStatus
+            onClick={() => handleUpdateStatus(userStatus.INACTIVE)}
+            className="bg-green-500"
+          >
+            Active
+          </LabelStatus>
+        );
       default:
-        return <LabelStatus className="bg-red-500">Unactive</LabelStatus>;
+        return (
+          <LabelStatus
+            onClick={() => handleUpdateStatus(userStatus.ACTIVE)}
+            className="bg-red-500"
+          >
+            Unactive
+          </LabelStatus>
+        );
     }
   };
   return (
@@ -86,13 +112,6 @@ function UserItem({ member }) {
       </td>
       <td>
         <div className="flex items-center gap-x-5">
-          <Link href={`/manage/update-user?id=${member.id}`}>
-            <a>
-              <ButtonAction className="hover:text-blue-500 hover:border-blue-500">
-                <IconEdit></IconEdit>
-              </ButtonAction>
-            </a>
-          </Link>
           <ButtonAction
             className="hover:text-red-500 hover:border-red-500"
             onClick={() => handleDeleteMember(member.id)}
