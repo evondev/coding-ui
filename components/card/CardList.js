@@ -32,6 +32,7 @@ const CardList = () => {
             filter={card.filter}
             htmlCode={card.htmlCode}
             cssCode={card.cssCode}
+            author={card.author}
           ></Card>
         );
       })}

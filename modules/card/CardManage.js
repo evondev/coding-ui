@@ -5,7 +5,7 @@ import LabelStatus from "components/label/LabelStatus";
 import ButtonAction from "components/button/ButtonAction";
 import Button from "components/button/Button";
 import useFetchCards from "hooks/useFetchCards";
-import { cardStatus } from "constant/global-constant";
+import { cardStatus, userRole } from "constant/global-constant";
 import { IconEdit, IconTrash } from "components/icons";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "components/firebase/firebase-config";
@@ -19,6 +19,7 @@ import DropdownItem from "components/dropdown/DropdownItem";
 import CardFilterDropdown from "./CardFilterDropdown";
 import useToggle from "hooks/useToggle";
 import { debounce } from "lodash";
+import { useAuth } from "contexts/auth-context";
 
 const CardManage = (props) => {
   const [filter, setFilter] = React.useState("");
@@ -83,7 +84,10 @@ const CardManage = (props) => {
             placeholder={filter}
           ></CardFilterDropdown>
         </div>
-        <Button onClick={resetSearch} className="w-full h-full p-2 lg:w-auto">
+        <Button
+          onClick={resetSearch}
+          className="w-full h-full p-2 lg:w-auto bg-slate-700"
+        >
           Reset
         </Button>
       </div>
@@ -95,10 +99,16 @@ const CardManage = (props) => {
               <th>Filter</th>
               <th>Status</th>
               <th>CreatedAt</th>
+              <th>Author</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
+            {cards.length === 0 && (
+              <tr>
+                <td colSpan={6}>No data</td>
+              </tr>
+            )}
             {cards.length > 0 &&
               cards.map((card) => (
                 <CardRow key={card.title} card={card}></CardRow>
@@ -106,18 +116,18 @@ const CardManage = (props) => {
           </tbody>
         </table>
       </div>
-      <div className="mt-10 text-center">
-        <div className="cursor-pointer text-slate-400">Load more...</div>
-      </div>
     </div>
   );
 };
 
 const CardRow = ({ card }) => {
+  const { userInfo } = useAuth();
   const renderStatus = (status) => {
     switch (status) {
       case cardStatus.APPROVED:
         return <LabelStatus className="bg-green-500">Approved</LabelStatus>;
+      case cardStatus.PENDING:
+        return <LabelStatus className="bg-orange-500">Pending</LabelStatus>;
 
       default:
         return <LabelStatus className="bg-red-500">Rejected</LabelStatus>;
@@ -154,6 +164,7 @@ const CardRow = ({ card }) => {
       <td>
         {new Date(card.createdAt?.seconds * 1000).toLocaleDateString("vi-VI")}
       </td>
+      <td></td>
       <td>
         <div className="flex items-center gap-x-5">
           <Link href={`/manage/update-card?id=${card.id}`}>
@@ -163,12 +174,14 @@ const CardRow = ({ card }) => {
               </ButtonAction>
             </a>
           </Link>
-          <ButtonAction
-            className="hover:text-red-500 hover:border-red-500"
-            onClick={() => handleDeleteCard(card.id)}
-          >
-            <IconTrash></IconTrash>
-          </ButtonAction>
+          {userInfo?.role === userRole.ADMIN && (
+            <ButtonAction
+              className="hover:text-red-500 hover:border-red-500"
+              onClick={() => handleDeleteCard(card.id)}
+            >
+              <IconTrash></IconTrash>
+            </ButtonAction>
+          )}
         </div>
       </td>
     </tr>

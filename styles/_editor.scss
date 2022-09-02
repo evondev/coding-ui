@@ -10,6 +10,7 @@ body .w-tc-editor {
   --gradient-third: var(--gradient-primary);
   @apply font-normal w-full p-4 text-base text-white transition-all border border-transparent rounded-lg outline-none border-slate-700 bg-slate-900 focus:border-blue-500 resize-none overflow-y-auto font-mono leading-loose;
   overflow-y: auto !important;
+  max-height: 300px;
   textarea {
     @apply placeholder:font-primary placeholder:font-medium;
   }

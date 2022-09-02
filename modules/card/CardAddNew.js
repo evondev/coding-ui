@@ -5,6 +5,7 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import { cardStatus } from "constant/global-constant";
+import { useAuth } from "contexts/auth-context";
 import {
   addDoc,
   collection,
@@ -19,6 +20,7 @@ import CardAction from "./CardAction";
 import CardFilterDropdown from "./CardFilterDropdown";
 
 const CardAddNew = () => {
+  const { userInfo } = useAuth();
   const [filterList, setFilterList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
@@ -30,7 +32,11 @@ const CardAddNew = () => {
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
-    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    const newValues = { ...values };
+    delete newValues.author;
+    const isAllInputFilled = Object.values(newValues).every((item) => {
+      return item !== "";
+    });
     if (!isAllInputFilled) {
       toast.error("Please fill all inputs");
       return;
@@ -40,10 +46,13 @@ const CardAddNew = () => {
     try {
       addDoc(colRef, {
         ...values,
-        status: cardStatus.APPROVED,
+        status: cardStatus.PENDING,
         createdAt: serverTimestamp(),
+        userId: userInfo?.uid,
+        userFullname: userInfo?.fullname,
+        userEmailAddress: userInfo?.email,
       });
-      toast.success("Card added successfully");
+      toast.success("Card added successfully and waiting for admin approval");
     } catch (err) {
       toast.error(err.message);
     } finally {
@@ -100,19 +109,7 @@ const CardAddNew = () => {
             ></CardFilterDropdown>
           </FormGroup>
         </div>
-        <div className="flex items-center gap-x-5">
-          <FormGroup>
-            <Label>Author Name</Label>
-            <Input
-              name="author"
-              type="text"
-              placeholder="Enter the author name"
-              onChange={onChange}
-              required
-              value={values.author}
-            />
-          </FormGroup>
-        </div>
+
         <FormGroup>
           <Label>HTML</Label>
           <CodeEditorBlock
@@ -133,6 +130,18 @@ const CardAddNew = () => {
             name="cssCode"
           ></CodeEditorBlock>
         </FormGroup>
+        <div className="flex items-center gap-x-5">
+          <FormGroup>
+            <Label>Author (optional)</Label>
+            <Input
+              name="author"
+              type="text"
+              placeholder="Enter the author(credit)"
+              onChange={onChange}
+              value={values.author}
+            />
+          </FormGroup>
+        </div>
         <div className="mt-10 text-center">
           <Button isLoading={loading} type="submit" className="w-[200px]">
             Add new card

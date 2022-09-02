@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         primary: ["DM Sans", "sans-serif"],
+        secondary: ["Intervar", "sans-serif"],
       },
       colors: {
         grayf5: "#F5F7FA",

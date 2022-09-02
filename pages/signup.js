@@ -1,18 +1,24 @@
 import Banner from "components/Banner";
 import Button from "components/button/Button";
-import { auth } from "components/firebase/firebase-config";
+import { auth, db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import LayoutMain from "components/layout/LayoutMain";
+import { userRole, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
+import PageNotFound from "./404";
 
-const LoginPage = () => {
+const CreateAccountPage = () => {
   const { userInfo } = useAuth();
   const router = useRouter();
   useEffect(() => {
@@ -22,9 +28,10 @@ const LoginPage = () => {
   const [values, setValues] = React.useState({
     email: "",
     password: "",
+    name: "",
   });
   const { onChange } = useInputChange(values, setValues);
-  const handleLogin = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     const { email, password } = values;
     if (!email || !password) {
@@ -32,18 +39,37 @@ const LoginPage = () => {
       return;
     }
     try {
-      await signInWithEmailAndPassword(auth, values.email, values.password);
-      toast.success("Login successful");
-      router.push("/manage/cards");
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+      await setDoc(doc(db, "users", auth.currentUser.uid), {
+        userId: auth.currentUser.uid,
+        fullname: values.name,
+        email: values.email,
+        password: values.password,
+        status: userStatus.INACTIVE,
+        role: userRole.USER,
+        createdAt: serverTimestamp(),
+      });
+      toast.success("Create account successfully");
     } catch (error) {
       console.log(error);
       toast.error(error.message);
     }
   };
+  return <PageNotFound></PageNotFound>;
   return (
-    <LayoutMain title="Login Page">
+    <LayoutMain title="Sign up Page">
       <div className="max-w-2xl mx-auto rounded-lg border-slate-800">
-        <form onSubmit={handleLogin} autoComplete="off">
+        <form onSubmit={handleSignUp} autoComplete="off">
+          <FormGroup>
+            <Label>Your name</Label>
+            <Input
+              type="text"
+              placeholder="Enter your name"
+              name="name"
+              onChange={onChange}
+              required
+            ></Input>
+          </FormGroup>
           <FormGroup>
             <Label>Email</Label>
             <Input
@@ -64,8 +90,8 @@ const LoginPage = () => {
               required
             ></Input>
           </FormGroup>
-          <Button type="submit" className="w-full text-lg bg-gradient-primary">
-            Login
+          <Button type="submit" className="w-full bg-gradient-primary">
+            Sign up
           </Button>
         </form>
       </div>
@@ -73,4 +99,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default CreateAccountPage;

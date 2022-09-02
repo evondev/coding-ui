@@ -24,21 +24,25 @@ const Header = () => {
               <p>
                 <span>Hello,</span>
                 <strong className="ml-1 font-bold text-transparent bg-clip-text bg-gradient-primary">
-                  User
+                  {userInfo?.fullname || "user"}
                 </strong>
               </p>
             </a>
           </Link>
         )}
         {!userInfo?.email && (
-          <a
-            href="https://evondev.com/donate"
-            target="_blank"
-            className="flex items-center px-6 py-3 text-sm font-bold text-white rounded-lg bg-gradient-primary"
-            rel="noreferrer"
-          >
-            Donate me ❤️
-          </a>
+          <div className="flex items-center gap-x-3">
+            <Link href="/signup">
+              <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg">
+                Sign up
+              </a>
+            </Link>
+            <Link href="/login">
+              <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg bg-gradient-secondary">
+                Login
+              </a>
+            </Link>
+          </div>
         )}
       </div>
     </div>

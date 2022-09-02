@@ -7,7 +7,7 @@ const UpdateCardPage = () => {
   const router = useRouter();
   const { id } = router.query;
   return (
-    <LayoutDashboard heading="Update card">
+    <LayoutDashboard heading="Update card" hasPermission back="/manage/cards">
       <CardUpdate id={id}></CardUpdate>
     </LayoutDashboard>
   );

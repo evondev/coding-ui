@@ -56,30 +56,23 @@ const Card = (props) => {
           <h4 className="flex items-center text-sm font-normal text-white gap-x-2">
             {author && (
               <>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <strong className="text-third">{author}</strong>
+                <span>Credit: </span>
+                <strong className="text-third max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                  {author}
+                </strong>
               </>
             )}
           </h4>
-          <div className="flex items-center gap-x-2">
-            <ButtonAction onClick={handleViewCode}>
-              <IconEye></IconEye>
-            </ButtonAction>
-            {/* <ButtonAction onClick={handleViewCode}>
+          {!preview && (
+            <div className="flex items-center gap-x-2">
+              <ButtonAction onClick={handleViewCode}>
+                <IconEye></IconEye>
+              </ButtonAction>
+              {/* <ButtonAction onClick={handleViewCode}>
             <IconHeart></IconHeart>
           </ButtonAction> */}
-          </div>
+            </div>
+          )}
         </div>
         <div className="py-10 card-ui">
           <CardStyles css={!preview ? cssSourceCode : null}>
@@ -88,35 +81,37 @@ const Card = (props) => {
           </CardStyles>
         </div>
         <div className="flex items-center justify-between mt-auto card-footer gap-x-2">
-          <h3 className="text-sm font-semibold text-white card-title">
+          <h3 className="text-sm font-semibold text-white card-title max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
             {title}
           </h3>
-          <div
-            className="flex items-center gap-x-2"
-            aria-label="button-combination"
-          >
-            <ButtonCopy
-              type="css"
-              onClick={() =>
-                copyToClipBoard(
-                  cssbeautify(cssSourceCode, {
-                    indent: `  `,
-                    autosemicolon: true,
-                  })
-                )
-              }
+          {!preview && (
+            <div
+              className="flex items-center gap-x-2"
+              aria-label="button-combination"
             >
-              CSS
-            </ButtonCopy>
-            <ButtonCopy
-              type="html"
-              onClick={() =>
-                copyToClipBoard(pretty(htmlSourceCode, { ocd: true }))
-              }
-            >
-              HTML
-            </ButtonCopy>
-          </div>
+              <ButtonCopy
+                type="css"
+                onClick={() =>
+                  copyToClipBoard(
+                    cssbeautify(cssSourceCode, {
+                      indent: `  `,
+                      autosemicolon: true,
+                    })
+                  )
+                }
+              >
+                CSS
+              </ButtonCopy>
+              <ButtonCopy
+                type="html"
+                onClick={() =>
+                  copyToClipBoard(pretty(htmlSourceCode, { ocd: true }))
+                }
+              >
+                HTML
+              </ButtonCopy>
+            </div>
+          )}
         </div>
       </div>
     </>

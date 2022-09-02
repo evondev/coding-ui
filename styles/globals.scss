@@ -4,6 +4,10 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: "Inter var";
+    src: url("/intervar.woff2");
+  }
   :root {
     --blue: #2cccff;
     --primary: var(--blue);
@@ -13,7 +17,11 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-slate-900 font-primary  text-white pb-10 font-light;
+    @apply bg-slate-900 font-primary  text-white pb-10 font-light mx-auto;
+    max-width: 1920px;
+  }
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
   }
   .scrollbar-style::-webkit-scrollbar,
   .w-tc-editor::-webkit-scrollbar,
