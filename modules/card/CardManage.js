@@ -141,9 +141,11 @@ const CardRow = ({ card }) => {
     }
   };
   const handleDeleteCard = async (id) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      return;
+    }
     try {
       const docRef = doc(db, "cards", id);
-      console.log("handleDeleteCard ~ docRef", docRef);
       Swal.fire({
         title: "Are you sure?",
         icon: "warning",

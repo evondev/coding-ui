@@ -5,7 +5,7 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Toggle from "components/toggle/Toggle";
-import { cardStatus, userRole } from "constant/global-constant";
+import { cardStatus, userRole, userStatus } from "constant/global-constant";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import useToggle from "hooks/useToggle";
@@ -13,13 +13,12 @@ import pretty from "pretty";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import cssbeautify from "cssbeautify";
-
 import CardFilterDropdown from "./CardFilterDropdown";
-import Card from "components/card/Card";
 import CardAction from "./CardAction";
 import { useAuth } from "contexts/auth-context";
 
 const CardUpdate = ({ id }) => {
+  const { userInfo } = useAuth();
   const [values, setValues] = useState({
     title: "",
     filter: "",
@@ -33,7 +32,6 @@ const CardUpdate = ({ id }) => {
     async function fetchData() {
       const docRef = doc(db, "cards", id);
       const docSnap = await getDoc(docRef);
-      console.log("fetchData ~ docSnap", docSnap.data());
       if (docSnap.exists()) {
         setValues({
           ...docSnap.data(),
@@ -50,6 +48,10 @@ const CardUpdate = ({ id }) => {
   }, [id]);
   const handleUpdateCard = async (e) => {
     e.preventDefault();
+    if (userInfo?.status === userStatus.INACTIVE) {
+      toast.warning("Your account is not active");
+      return;
+    }
     try {
       setLoading(true);
       const docRef = doc(db, "cards", id);
@@ -80,7 +82,6 @@ const CardUpdate = ({ id }) => {
     });
     toggle();
   };
-  const { userInfo } = useAuth();
   return (
     <CardAction values={values}>
       <form onSubmit={handleUpdateCard} autoComplete="off">

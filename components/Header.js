@@ -38,7 +38,7 @@ const Header = () => {
               </a>
             </Link>
             <Link href="/login">
-              <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg bg-gradient-secondary">
+              <a className="flex items-center px-6 py-3 text-sm font-medium text-white rounded-lg bg-gradient-secondary button-effect">
                 Login
               </a>
             </Link>

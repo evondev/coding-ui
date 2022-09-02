@@ -86,7 +86,10 @@ const CreateAccountPage = () => {
               required
             ></Input>
           </FormGroup>
-          <Button type="submit" className="w-full text-lg bg-gradient-primary">
+          <Button
+            type="submit"
+            className="w-full text-lg bg-gradient-secondary button-effect"
+          >
             Sign up
           </Button>
         </form>

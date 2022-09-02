@@ -4,7 +4,7 @@ import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
-import { cardStatus } from "constant/global-constant";
+import { cardStatus, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
 import {
   addDoc,
@@ -32,6 +32,10 @@ const CardAddNew = () => {
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
+    if (userInfo?.status === userStatus.INACTIVE) {
+      toast.warning("Your account is not active");
+      return;
+    }
     const newValues = { ...values };
     delete newValues.author;
     const isAllInputFilled = Object.values(newValues).every((item) => {

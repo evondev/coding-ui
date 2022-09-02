@@ -28,7 +28,7 @@ const Banner = () => {
         <a
           href="https://fb.com/tuan.trananh.0509"
           target="_blank"
-          className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-gradient-secondary rounded-lg h-[60px] w-full sm:w-[230px] button-effect"
+          className="inline-flex items-center justify-center gap-x-3 px-8 py-4 font-sans font-semibold tracking-wide text-white bg-gradient-primary rounded-lg h-[60px] w-full sm:w-[230px] button-effect"
           rel="noreferrer"
         >
           <IconChat></IconChat>
