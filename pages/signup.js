@@ -1,4 +1,3 @@
-import Banner from "components/Banner";
 import Button from "components/button/Button";
 import { auth, db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
@@ -7,10 +6,7 @@ import Label from "components/label/Label";
 import LayoutMain from "components/layout/LayoutMain";
 import { userRole, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import { useRouter } from "next/router";
@@ -90,7 +86,7 @@ const CreateAccountPage = () => {
               required
             ></Input>
           </FormGroup>
-          <Button type="submit" className="w-full bg-gradient-primary">
+          <Button type="submit" className="w-full text-lg bg-gradient-primary">
             Sign up
           </Button>
         </form>

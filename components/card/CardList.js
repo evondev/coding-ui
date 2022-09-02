@@ -6,6 +6,7 @@ import CardLoading from "./CardLoading";
 
 const CardList = () => {
   const { cards, isLoading } = useFetchCards({ status: cardStatus.APPROVED });
+  console.log("CardList ~ isLoading", isLoading);
   if (isLoading)
     return (
       <div

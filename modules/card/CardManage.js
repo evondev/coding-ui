@@ -20,6 +20,7 @@ import CardFilterDropdown from "./CardFilterDropdown";
 import useToggle from "hooks/useToggle";
 import { debounce } from "lodash";
 import { useAuth } from "contexts/auth-context";
+import Checkbox from "components/checkbox/Checkbox";
 
 const CardManage = (props) => {
   const [filter, setFilter] = React.useState("");
@@ -69,6 +70,9 @@ const CardManage = (props) => {
             >
               Approved
             </DropdownItem>
+            <DropdownItem onClick={() => handleClickStatus(cardStatus.PENDING)}>
+              Pending
+            </DropdownItem>
             <DropdownItem
               onClick={() => handleClickStatus(cardStatus.REJECTED)}
             >
@@ -95,6 +99,9 @@ const CardManage = (props) => {
         <table className="w-full">
           <thead>
             <tr>
+              <th>
+                <Checkbox></Checkbox>
+              </th>
               <th>Title</th>
               <th>Filter</th>
               <th>Status</th>
@@ -106,7 +113,7 @@ const CardManage = (props) => {
           <tbody>
             {cards.length === 0 && (
               <tr>
-                <td colSpan={6}>No data</td>
+                <td colSpan={7}>No data</td>
               </tr>
             )}
             {cards.length > 0 &&
@@ -154,6 +161,9 @@ const CardRow = ({ card }) => {
   };
   return (
     <tr>
+      <td>
+        <Checkbox></Checkbox>
+      </td>
       <td>
         <Link href={`/manage/update-card?id=${card.id}`}>
           <a className="text-white">{card.title}</a>
