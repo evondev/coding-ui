@@ -57,18 +57,22 @@ const Card = (props) => {
             {author && (
               <>
                 <span>Credit: </span>
-                <strong className="text-slate-400">{author}</strong>
+                <strong className="text-third max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                  {author}
+                </strong>
               </>
             )}
           </h4>
-          <div className="flex items-center gap-x-2">
-            <ButtonAction onClick={handleViewCode}>
-              <IconEye></IconEye>
-            </ButtonAction>
-            {/* <ButtonAction onClick={handleViewCode}>
+          {!preview && (
+            <div className="flex items-center gap-x-2">
+              <ButtonAction onClick={handleViewCode}>
+                <IconEye></IconEye>
+              </ButtonAction>
+              {/* <ButtonAction onClick={handleViewCode}>
             <IconHeart></IconHeart>
           </ButtonAction> */}
-          </div>
+            </div>
+          )}
         </div>
         <div className="py-10 card-ui">
           <CardStyles css={!preview ? cssSourceCode : null}>
@@ -77,35 +81,37 @@ const Card = (props) => {
           </CardStyles>
         </div>
         <div className="flex items-center justify-between mt-auto card-footer gap-x-2">
-          <h3 className="text-sm font-semibold text-white card-title">
+          <h3 className="text-sm font-semibold text-white card-title max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
             {title}
           </h3>
-          <div
-            className="flex items-center gap-x-2"
-            aria-label="button-combination"
-          >
-            <ButtonCopy
-              type="css"
-              onClick={() =>
-                copyToClipBoard(
-                  cssbeautify(cssSourceCode, {
-                    indent: `  `,
-                    autosemicolon: true,
-                  })
-                )
-              }
+          {!preview && (
+            <div
+              className="flex items-center gap-x-2"
+              aria-label="button-combination"
             >
-              CSS
-            </ButtonCopy>
-            <ButtonCopy
-              type="html"
-              onClick={() =>
-                copyToClipBoard(pretty(htmlSourceCode, { ocd: true }))
-              }
-            >
-              HTML
-            </ButtonCopy>
-          </div>
+              <ButtonCopy
+                type="css"
+                onClick={() =>
+                  copyToClipBoard(
+                    cssbeautify(cssSourceCode, {
+                      indent: `  `,
+                      autosemicolon: true,
+                    })
+                  )
+                }
+              >
+                CSS
+              </ButtonCopy>
+              <ButtonCopy
+                type="html"
+                onClick={() =>
+                  copyToClipBoard(pretty(htmlSourceCode, { ocd: true }))
+                }
+              >
+                HTML
+              </ButtonCopy>
+            </div>
+          )}
         </div>
       </div>
     </>

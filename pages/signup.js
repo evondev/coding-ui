@@ -16,6 +16,7 @@ import useInputChange from "hooks/useInputChange";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
+import PageNotFound from "./404";
 
 const CreateAccountPage = () => {
   const { userInfo } = useAuth();
@@ -54,6 +55,7 @@ const CreateAccountPage = () => {
       toast.error(error.message);
     }
   };
+  return <PageNotFound></PageNotFound>;
   return (
     <LayoutMain title="Sign up Page">
       <div className="max-w-2xl mx-auto rounded-lg border-slate-800">

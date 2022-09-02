@@ -118,19 +118,6 @@ const CardUpdate = ({ id }) => {
             ></CardFilterDropdown>
           </FormGroup>
         </div>
-        <div className="flex items-center gap-x-5">
-          <FormGroup>
-            <Label>Author Name</Label>
-            <Input
-              name="author"
-              type="text"
-              placeholder="Enter the author name"
-              onChange={onChange}
-              required
-              value={values.author}
-            />
-          </FormGroup>
-        </div>
 
         <FormGroup>
           <Label>HTML</Label>
@@ -152,6 +139,18 @@ const CardUpdate = ({ id }) => {
             name="cssCode"
           ></CodeEditorBlock>
         </FormGroup>
+        <div className="flex items-center gap-x-5">
+          <FormGroup>
+            <Label>Author (optional)</Label>
+            <Input
+              name="author"
+              type="text"
+              placeholder="Enter the author(credit)"
+              onChange={onChange}
+              value={values.author}
+            />
+          </FormGroup>
+        </div>
 
         <div className="mt-10 text-center">
           <Button isLoading={loading} type="submit" className="w-[200px]">

@@ -13,7 +13,6 @@ const LayoutDashboard = ({
   back = "",
 }) => {
   const { userInfo, loading } = useAuth();
-  const router = useRouter();
 
   if (loading) return null;
   if (!userInfo?.email || !hasPermission) return <PageNotFound></PageNotFound>;

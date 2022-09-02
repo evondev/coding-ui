@@ -32,8 +32,10 @@ const CardAddNew = () => {
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
-    const isAllInputFilled = Object.values(values).every((item) => {
-      return item !== "" && item !== "author";
+    const newValues = { ...values };
+    delete newValues.author;
+    const isAllInputFilled = Object.values(newValues).every((item) => {
+      return item !== "";
     });
     if (!isAllInputFilled) {
       toast.error("Please fill all inputs");
@@ -130,7 +132,7 @@ const CardAddNew = () => {
         </FormGroup>
         <div className="flex items-center gap-x-5">
           <FormGroup>
-            <Label>Author(credit)</Label>
+            <Label>Author (optional)</Label>
             <Input
               name="author"
               type="text"
