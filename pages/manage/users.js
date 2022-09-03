@@ -46,8 +46,13 @@ const ManageUsers = () => {
 };
 
 function UserItem({ member }) {
+  const { userInfo } = useAuth();
   if (!member) return null;
   const handleDeleteMember = async (id) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      toast.error("This feature only for admin!");
+      return;
+    }
     try {
       const docRef = doc(db, "users", id);
       Swal.fire({
@@ -66,6 +71,10 @@ function UserItem({ member }) {
     }
   };
   const handleUpdateStatus = async (status) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      toast.error("This feature only for admin!");
+      return;
+    }
     try {
       const docRef = doc(db, "users", member.id);
       await updateDoc(docRef, {

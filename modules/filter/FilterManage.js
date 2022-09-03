@@ -3,7 +3,8 @@ import ButtonNew from "components/button/ButtonNew";
 import { db } from "components/firebase/firebase-config";
 import { IconEdit, IconTrash } from "components/icons";
 import LabelStatus from "components/label/LabelStatus";
-import { filterStatus } from "constant/global-constant";
+import { filterStatus, userRole } from "constant/global-constant";
+import { useAuth } from "contexts/auth-context";
 import { deleteDoc, doc } from "firebase/firestore";
 import useFetchFilter from "hooks/useFetchFilter";
 import Link from "next/link";
@@ -39,6 +40,7 @@ const FilterManage = () => {
 };
 
 const FilterRow = ({ filter }) => {
+  const { userInfo } = useAuth();
   const renderStatus = (status) => {
     switch (status) {
       case filterStatus.APPROVED:
@@ -49,6 +51,10 @@ const FilterRow = ({ filter }) => {
     }
   };
   const handleDeleteFilter = async (id) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      toast.error("This feature only for admin!");
+      return;
+    }
     try {
       const docRef = doc(db, "filters", id);
       Swal.fire({
