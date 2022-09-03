@@ -32,12 +32,8 @@ const CardAddNew = () => {
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
-    if (userInfo?.role === userRole.USER) {
-      toast.error("This feature is coming soon!");
-      return;
-    }
     if (userInfo?.status === userStatus.INACTIVE) {
-      toast.warning("Your account is not active");
+      toast.warning("Your account is not active, please contact admin");
       return;
     }
     const newValues = { ...values };
