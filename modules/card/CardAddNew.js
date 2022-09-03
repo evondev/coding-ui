@@ -4,7 +4,7 @@ import { db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
-import { cardStatus, userStatus } from "constant/global-constant";
+import { cardStatus, userRole, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
 import {
   addDoc,
@@ -32,6 +32,10 @@ const CardAddNew = () => {
   });
   const handleAddNewCard = (e) => {
     e.preventDefault();
+    if (userInfo?.role === userRole.USER) {
+      toast.error("This feature is coming soon!");
+      return;
+    }
     if (userInfo?.status === userStatus.INACTIVE) {
       toast.warning("Your account is not active");
       return;

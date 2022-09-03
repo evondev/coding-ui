@@ -48,6 +48,10 @@ const CardUpdate = ({ id }) => {
   }, [id]);
   const handleUpdateCard = async (e) => {
     e.preventDefault();
+    if (userInfo?.role === userRole.USER) {
+      toast.error("This feature is coming soon!");
+      return;
+    }
     if (userInfo?.status === userStatus.INACTIVE) {
       toast.warning("Your account is not active");
       return;
