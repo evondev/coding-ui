@@ -9,7 +9,7 @@ const Dropdown = ({
   return (
     <div className="relative w-full">
       <div
-        className="w-full p-4 text-base text-white capitalize transition-all border border-transparent rounded-lg outline-none cursor-pointer bg-slate-900 border-slate-700"
+        className="w-full p-4 text-base text-white capitalize transition-all border rounded-lg outline-none cursor-pointer bg-slate-900 border-slate-700"
         onClick={onClick}
       >
         {placeholder}

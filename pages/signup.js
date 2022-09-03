@@ -12,7 +12,6 @@ import useInputChange from "hooks/useInputChange";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-import PageNotFound from "./404";
 
 const CreateAccountPage = () => {
   const { userInfo } = useAuth();
@@ -29,9 +28,9 @@ const CreateAccountPage = () => {
   const { onChange } = useInputChange(values, setValues);
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { email, password } = values;
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
+    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    if (!isAllInputFilled) {
+      toast.error("Please fill all inputs");
       return;
     }
     try {
@@ -51,7 +50,6 @@ const CreateAccountPage = () => {
       toast.error(error.message);
     }
   };
-  return <PageNotFound></PageNotFound>;
   return (
     <LayoutMain title="Sign up Page">
       <div className="max-w-2xl mx-auto rounded-lg border-slate-800">
@@ -90,7 +88,7 @@ const CreateAccountPage = () => {
             type="submit"
             className="w-full text-lg bg-gradient-secondary button-effect"
           >
-            Sign up
+            Sign Up
           </Button>
         </form>
       </div>

@@ -11,6 +11,7 @@ import CodeEditorBlock from "components/CodeEditorBlock";
 import Label from "components/label/Label";
 import { globalStore } from "store/global-store";
 import shallow from "zustand/shallow";
+import Head from "next/head";
 
 Modal.setAppElement("#__next");
 Modal.defaultStyles = {
@@ -30,6 +31,9 @@ function MyApp({ Component, pageProps }) {
   );
   return (
     <AuthProvider>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <Component {...pageProps} />
       <ToastContainer
         bodyClassName="font-primary text-sm text-slate-500"

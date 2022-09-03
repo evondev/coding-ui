@@ -51,7 +51,7 @@ const CardManage = (props) => {
   return (
     <div className="mt-10">
       <ButtonNew href="/manage/new-card"></ButtonNew>
-      <div className="grid flex-wrap grid-cols-2 gap-5 mb-10 lg:flex lg:justify-end">
+      <div className="grid flex-wrap grid-cols-1 gap-5 mb-10 lg:flex lg:justify-end">
         <div className="w-full lg:w-[200px]">
           <Input
             name="filter"
@@ -90,13 +90,13 @@ const CardManage = (props) => {
         </div>
         <Button
           onClick={resetSearch}
-          className="w-full h-full p-2 lg:w-auto bg-slate-700"
+          className="w-full h-full p-2 lg:w-auto !bg-slate-700 button-effect"
         >
-          Reset
+          Clear filter
         </Button>
       </div>
-      <div className="table overflow-x-auto">
-        <table className="w-full">
+      <div className="w-full overflow-x-auto">
+        <table className="table">
           <thead>
             <tr>
               <th>

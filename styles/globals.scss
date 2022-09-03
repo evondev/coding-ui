@@ -17,7 +17,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-slate-900 font-primary  text-white pb-10 font-light mx-auto;
+    @apply bg-slate-900 font-primary  text-white pb-10 font-light mx-auto overflow-x-hidden;
     max-width: 1920px;
   }
   button:disabled {
@@ -55,15 +55,12 @@
   .hidden-scroll::-webkit-scrollbar {
     display: none;
   }
-  input:invalid:focus {
-    @apply border-primary;
-  }
 }
 .table {
   @apply w-full;
   th,
   td {
-    @apply p-3 text-left;
+    @apply p-3 text-left whitespace-nowrap;
   }
   th {
     @apply text-slate-400;
