@@ -19,7 +19,6 @@ export default function useFetchCards({
   count = 100,
 }) {
   const { userInfo } = useAuth();
-  console.log("userInfo", userInfo);
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
   useEffect(() => {
@@ -58,7 +57,8 @@ export default function useFetchCards({
       }
     }
     fetchData();
-  }, [filter, name, status, count]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter, name, status]);
   return {
     cards,
     isLoading: loading,

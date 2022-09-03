@@ -1,4 +1,3 @@
-import Banner from "components/Banner";
 import Button from "components/button/Button";
 import { auth, db } from "components/firebase/firebase-config";
 import FormGroup from "components/form/FormGroup";
@@ -7,16 +6,12 @@ import Label from "components/label/Label";
 import LayoutMain from "components/layout/LayoutMain";
 import { userRole, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { toast } from "react-toastify";
-import PageNotFound from "./404";
 
 const CreateAccountPage = () => {
   const { userInfo } = useAuth();
@@ -33,9 +28,9 @@ const CreateAccountPage = () => {
   const { onChange } = useInputChange(values, setValues);
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const { email, password } = values;
-    if (!email || !password) {
-      toast.error("Please fill in all fields");
+    const isAllInputFilled = Object.values(values).every((item) => item !== "");
+    if (!isAllInputFilled) {
+      toast.error("Please fill all inputs");
       return;
     }
     try {
@@ -55,7 +50,6 @@ const CreateAccountPage = () => {
       toast.error(error.message);
     }
   };
-  return <PageNotFound></PageNotFound>;
   return (
     <LayoutMain title="Sign up Page">
       <div className="max-w-2xl mx-auto rounded-lg border-slate-800">
@@ -90,8 +84,11 @@ const CreateAccountPage = () => {
               required
             ></Input>
           </FormGroup>
-          <Button type="submit" className="w-full bg-gradient-primary">
-            Sign up
+          <Button
+            type="submit"
+            className="w-full text-lg bg-gradient-secondary button-effect"
+          >
+            Sign Up
           </Button>
         </form>
       </div>

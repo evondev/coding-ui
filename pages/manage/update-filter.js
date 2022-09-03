@@ -37,6 +37,10 @@ const UpdateFilterPage = () => {
   const [loading, setLoading] = useState(false);
   const { onChange } = useInputChange(values, setValues);
   const handleUpdateFilter = async (e) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      toast.error("This feature only for admin!");
+      return;
+    }
     e.preventDefault();
     try {
       setLoading(true);

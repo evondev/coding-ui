@@ -17,12 +17,12 @@ const LayoutDashboard = ({
   if (loading) return null;
   if (!userInfo?.email || !hasPermission) return <PageNotFound></PageNotFound>;
   return (
-    <div className="min-h-screen grid lg:grid-cols-[300px,minmax(0,1fr)]">
+    <div className="min-h-screen block lg:grid lg:grid-cols-[300px,minmax(0,1fr)]">
       <Head>
         <title>CodingUI - {heading}</title>
       </Head>
       <Sidebar></Sidebar>
-      <div className="relative p-10" aria-label="main">
+      <div className="relative p-5 lg:p-10" aria-label="main">
         <div className="flex flex-col items-start gap-5 mb-10">
           {back && (
             <Link href={back}>

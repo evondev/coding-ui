@@ -4,13 +4,15 @@ import FormGroup from "components/form/FormGroup";
 import Input from "components/input/Input";
 import Label from "components/label/Label";
 import Toggle from "components/toggle/Toggle";
-import { filterStatus } from "constant/global-constant";
+import { filterStatus, userRole } from "constant/global-constant";
+import { useAuth } from "contexts/auth-context";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import useInputChange from "hooks/useInputChange";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 const FilterAddNew = () => {
+  const { userInfo } = useAuth();
   const [values, setValues] = useState({
     name: "",
     status: filterStatus.REJECTED,
@@ -18,6 +20,10 @@ const FilterAddNew = () => {
   const { onChange } = useInputChange(values, setValues);
   const handleAddNewFilter = (e) => {
     e.preventDefault();
+    if (userInfo?.role !== userRole.ADMIN) {
+      toast.error("This feature only for admin!");
+      return;
+    }
     const isAllInputFilled = Object.values(values).every((item) => item !== "");
     if (!isAllInputFilled) {
       toast.error("Please fill all inputs");

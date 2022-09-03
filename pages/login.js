@@ -64,7 +64,10 @@ const LoginPage = () => {
               required
             ></Input>
           </FormGroup>
-          <Button type="submit" className="w-full text-lg bg-gradient-primary">
+          <Button
+            type="submit"
+            className="w-full text-lg bg-gradient-secondary button-effect"
+          >
             Login
           </Button>
         </form>

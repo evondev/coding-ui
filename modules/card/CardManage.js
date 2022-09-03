@@ -20,6 +20,7 @@ import CardFilterDropdown from "./CardFilterDropdown";
 import useToggle from "hooks/useToggle";
 import { debounce } from "lodash";
 import { useAuth } from "contexts/auth-context";
+import Checkbox from "components/checkbox/Checkbox";
 
 const CardManage = (props) => {
   const [filter, setFilter] = React.useState("");
@@ -50,7 +51,7 @@ const CardManage = (props) => {
   return (
     <div className="mt-10">
       <ButtonNew href="/manage/new-card"></ButtonNew>
-      <div className="grid flex-wrap grid-cols-2 gap-5 mb-10 lg:flex lg:justify-end">
+      <div className="grid flex-wrap grid-cols-1 gap-5 mb-10 lg:flex lg:justify-end">
         <div className="w-full lg:w-[200px]">
           <Input
             name="filter"
@@ -69,6 +70,9 @@ const CardManage = (props) => {
             >
               Approved
             </DropdownItem>
+            <DropdownItem onClick={() => handleClickStatus(cardStatus.PENDING)}>
+              Pending
+            </DropdownItem>
             <DropdownItem
               onClick={() => handleClickStatus(cardStatus.REJECTED)}
             >
@@ -86,15 +90,18 @@ const CardManage = (props) => {
         </div>
         <Button
           onClick={resetSearch}
-          className="w-full h-full p-2 lg:w-auto bg-slate-700"
+          className="w-full h-full p-2 lg:w-auto !bg-slate-700 button-effect"
         >
-          Reset
+          Clear filter
         </Button>
       </div>
-      <div className="table overflow-x-auto">
-        <table className="w-full">
+      <div className="w-full overflow-x-auto">
+        <table className="table">
           <thead>
             <tr>
+              <th>
+                <Checkbox></Checkbox>
+              </th>
               <th>Title</th>
               <th>Filter</th>
               <th>Status</th>
@@ -106,7 +113,7 @@ const CardManage = (props) => {
           <tbody>
             {cards.length === 0 && (
               <tr>
-                <td colSpan={6}>No data</td>
+                <td colSpan={7}>No data</td>
               </tr>
             )}
             {cards.length > 0 &&
@@ -134,9 +141,11 @@ const CardRow = ({ card }) => {
     }
   };
   const handleDeleteCard = async (id) => {
+    if (userInfo?.role !== userRole.ADMIN) {
+      return;
+    }
     try {
       const docRef = doc(db, "cards", id);
-      console.log("handleDeleteCard ~ docRef", docRef);
       Swal.fire({
         title: "Are you sure?",
         icon: "warning",
@@ -154,6 +163,9 @@ const CardRow = ({ card }) => {
   };
   return (
     <tr>
+      <td>
+        <Checkbox></Checkbox>
+      </td>
       <td>
         <Link href={`/manage/update-card?id=${card.id}`}>
           <a className="text-white">{card.title}</a>

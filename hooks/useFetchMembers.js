@@ -1,4 +1,5 @@
 import { db } from "components/firebase/firebase-config";
+import { userRole } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
 import {
   collection,
@@ -9,12 +10,12 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-export default function useFetchFilter(status = null) {
-  const [filters, setFilters] = useState([]);
+export default function useFetchMembers(status = null) {
+  const [members, setMembers] = useState([]);
   const { userInfo } = useAuth();
   useEffect(() => {
     async function fetchData() {
-      let colRef = collection(db, "filters");
+      let colRef = collection(db, "users");
       if (status) {
         colRef = query(colRef, where("status", "==", status));
       }
@@ -23,12 +24,12 @@ export default function useFetchFilter(status = null) {
         querySnapshot.forEach((doc) => {
           results.push({ id: doc.id, ...doc.data() });
         });
-        setFilters(results);
+        setMembers(results);
       });
     }
     fetchData();
   }, [status]);
   return {
-    filters,
+    members,
   };
 }
