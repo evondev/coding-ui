@@ -53,7 +53,7 @@ const Card = (props) => {
         className="relative flex flex-col p-5 border rounded border-slate-800 card"
       >
         <div className="flex items-center justify-between">
-          <h4 className="flex items-center text-sm font-normal text-white gap-x-2">
+          <h4 className="relative z-10 flex items-center text-sm font-normal text-white gap-x-2">
             {author && (
               <>
                 <span>Credit: </span>
@@ -80,7 +80,7 @@ const Card = (props) => {
             {htmlSourceCode && <>{parse(htmlSourceCode)}</>}
           </CardStyles>
         </div>
-        <div className="flex items-center justify-between mt-auto card-footer gap-x-2">
+        <div className="relative z-10 flex items-center justify-between mt-auto card-footer gap-x-2">
           <h3 className="text-sm font-semibold text-white card-title max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
             {title}
           </h3>

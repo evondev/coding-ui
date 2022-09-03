@@ -98,6 +98,10 @@
 .ReactModal__Body--open {
   overflow: hidden;
 }
+.wrapper-code {
+  @apply overflow-y-auto border rounded-lg border-slate-700;
+  max-height: 300px;
+}
 @keyframes pointer {
   100% {
     transform: scale(0.75);
