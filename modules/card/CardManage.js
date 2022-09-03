@@ -38,7 +38,13 @@ const CardManage = (props) => {
     setStatusText(item === cardStatus.APPROVED ? "Approved" : "Rejected");
     toggleStatus();
   };
-  const { cards } = useFetchCards({ status, name, filter, count: 100 });
+  const { cards } = useFetchCards({
+    status,
+    name,
+    filter,
+    count: 100,
+    isManage: true,
+  });
   const resetSearch = () => {
     setName("");
     setStatus(null);

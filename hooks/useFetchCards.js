@@ -17,6 +17,7 @@ export default function useFetchCards({
   name = "",
   filter = "",
   count = 100,
+  isManage = false,
 }) {
   const { userInfo } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ export default function useFetchCards({
       try {
         setLoading(true);
         let colRef = collection(db, "cards");
-        if (userInfo?.role === userRole.USER) {
+        if (isManage && userInfo?.role === userRole.USER) {
           colRef = query(colRef, where("userId", "==", userInfo.uid));
         }
         let queries = query(colRef, orderBy("createdAt", "desc"));

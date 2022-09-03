@@ -1,17 +1,9 @@
 import { db } from "components/firebase/firebase-config";
-import { useAuth } from "contexts/auth-context";
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 export default function useFetchFilter(status = null) {
   const [filters, setFilters] = useState([]);
-  const { userInfo } = useAuth();
   useEffect(() => {
     async function fetchData() {
       let colRef = collection(db, "filters");
