@@ -4,7 +4,7 @@ import Heart from "components/Heart";
 import Head from "next/head";
 import React from "react";
 
-const LayoutMain = ({ children, title = "CodingUI" }) => {
+const LayoutMain = ({ children, title = "CodingUI", hideBanner = false }) => {
   return (
     <>
       <Head>
@@ -13,7 +13,7 @@ const LayoutMain = ({ children, title = "CodingUI" }) => {
       <Header></Header>
       <Heart></Heart>
       <main className="l-container">
-        <Banner></Banner>
+        {!hideBanner && <Banner></Banner>}
         {children}
       </main>
     </>

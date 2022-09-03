@@ -41,8 +41,8 @@ const LoginPage = () => {
     }
   };
   return (
-    <LayoutMain title="Login Page">
-      <div className="max-w-2xl mx-auto rounded-lg border-slate-800">
+    <LayoutMain title="Login Page" hideBanner>
+      <div className="max-w-2xl py-10 mx-auto rounded-lg border-slate-800">
         <form onSubmit={handleLogin} autoComplete="off">
           <FormGroup>
             <Label>Email</Label>
@@ -66,7 +66,7 @@ const LoginPage = () => {
           </FormGroup>
           <Button
             type="submit"
-            className="w-full text-lg bg-gradient-secondary button-effect"
+            className="w-full text-lg bg-gradient-primary button-effect"
           >
             Login
           </Button>

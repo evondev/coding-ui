@@ -42,7 +42,7 @@ function FilterItem({ item, activeCard, onClick }) {
   return (
     <div
       key={item}
-      className={`flex items-center py-3 font-medium cursor-pointer gap-x-2 capitalize ${
+      className={`flex items-center py-3 font-medium cursor-pointer gap-x-2 capitalize text-sm lg:text-base ${
         activeCard
           ? "text-transparent bg-gradient-primary bg-clip-text border-b-2 border-third pointer-events-none"
           : "text-slate-300"

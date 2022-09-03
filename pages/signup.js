@@ -51,8 +51,8 @@ const CreateAccountPage = () => {
     }
   };
   return (
-    <LayoutMain title="Sign up Page">
-      <div className="max-w-2xl mx-auto rounded-lg border-slate-800">
+    <LayoutMain title="Sign up Page" hideBanner>
+      <div className="max-w-2xl py-10 mx-auto rounded-lg border-slate-800">
         <form onSubmit={handleSignUp} autoComplete="off">
           <FormGroup>
             <Label>Your name</Label>
@@ -86,7 +86,7 @@ const CreateAccountPage = () => {
           </FormGroup>
           <Button
             type="submit"
-            className="w-full text-lg bg-gradient-secondary button-effect"
+            className="w-full text-lg bg-gradient-primary button-effect"
           >
             Sign Up
           </Button>

@@ -12,7 +12,7 @@ const Banner = () => {
       <div className="flex items-center justify-center w-20 h-20 mx-auto mb-5 border-4 border-third bg-opacity-10">
         <IconPointer />
       </div>
-      <h1 className="max-w-xl mx-auto mb-10 text-4xl font-bold leading-relaxed text-center text-white">
+      <h1 className="max-w-xl mx-auto mb-10 text-3xl font-bold leading-snug text-center text-white lg:leading-relaxed lg:text-4xl">
         Get your free UI components with just few click
       </h1>
       <div className="flex flex-col justify-center gap-5 mb-10 sm:items-center sm:flex-row">
