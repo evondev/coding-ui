@@ -5,6 +5,10 @@
 
 @layer base {
   @font-face {
+    font-family: "SF mono";
+    src: url("/SFMonoLigaturized-Regular.ttf");
+  }
+  @font-face {
     font-family: "Inter var";
     src: url("/intervar.woff2");
   }

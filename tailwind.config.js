@@ -11,6 +11,7 @@ module.exports = {
       fontFamily: {
         primary: ["DM Sans", "sans-serif"],
         secondary: ["Intervar", "sans-serif"],
+        code: ["SF mono", "sans-serif"],
       },
       colors: {
         grayf5: "#F5F7FA",
