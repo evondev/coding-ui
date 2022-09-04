@@ -50,16 +50,16 @@ const Card = (props) => {
     <>
       <div
         data-filter={filter}
-        className="relative flex flex-col p-5 border rounded border-slate-800 card"
+        className="relative flex flex-col p-5 transition-all border rounded border-slate-800 hover:border-slate-600"
       >
         <div className="flex items-center justify-between">
-          <h4 className="relative z-10 flex items-center text-sm font-normal text-white gap-x-2">
+          <h4 className="relative z-10 flex items-center text-sm font-normal text-slate-500 gap-x-2">
             {author && (
               <>
                 <span>Credit: </span>
-                <strong className="text-third max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                <span className="text-slate-400 max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap font-medium">
                   {author}
-                </strong>
+                </span>
               </>
             )}
           </h4>
@@ -81,7 +81,7 @@ const Card = (props) => {
           </CardStyles>
         </div>
         <div className="relative z-10 flex items-center justify-between mt-auto card-footer gap-x-2">
-          <h3 className="text-sm font-semibold text-white card-title max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+          <h3 className="text-sm font-semibold text-white card-title max-w-[100px] lg:max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
             {title}
           </h3>
           {!preview && (

@@ -10,6 +10,7 @@ const Input = (props) => {
   return (
     <div className="relative w-full">
       <input
+        autoComplete="off"
         type={inputType}
         className={classNames(
           "w-full p-4 text-base text-white transition-all border rounded-lg outline-none bg-slate-900 focus:border-blue-500 border-slate-700",
