@@ -113,7 +113,7 @@ function UserItem({ member }) {
       <td>
         <Checkbox></Checkbox>
       </td>
-      <td>{member?.fullname || "Anonymous"}</td>
+      <td className="font-secondary">{member?.fullname || "Anonymous"}</td>
       <td>{member?.email}</td>
       <td>{renderStatus(member.status)}</td>
       <td>

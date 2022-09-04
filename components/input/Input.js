@@ -1,7 +1,8 @@
 import React from "react";
+import classNames from "utils/classNames";
 
 const Input = (props) => {
-  const { type = "text", ...rest } = props;
+  const { type = "text", className = "", ...rest } = props;
   const [inputType, setInputType] = React.useState(type);
   function togglePassword() {
     setInputType(inputType === "password" ? "text" : "password");
@@ -10,7 +11,10 @@ const Input = (props) => {
     <div className="relative w-full">
       <input
         type={inputType}
-        className="w-full p-4 text-base text-white transition-all border rounded-lg outline-none bg-slate-900 focus:border-blue-500 border-slate-700"
+        className={classNames(
+          "w-full p-4 text-base text-white transition-all border rounded-lg outline-none bg-slate-900 focus:border-blue-500 border-slate-700",
+          className
+        )}
         {...rest}
       ></input>
       {type === "password" && (

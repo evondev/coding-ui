@@ -23,7 +23,7 @@ const Header = () => {
               <div className="object-cover w-10 h-10 bg-white rounded-full" />
               <p>
                 <span>Hello,</span>
-                <strong className="ml-1 font-bold text-transparent bg-clip-text bg-gradient-primary">
+                <strong className="ml-1 font-bold text-transparent font-secondary bg-clip-text bg-gradient-primary">
                   {userInfo?.fullname || "user"}
                 </strong>
               </p>
