@@ -1,3 +1,4 @@
+import IconQuestion from "./../../components/icons/IconQuestion";
 import React from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
@@ -21,6 +22,8 @@ import useToggle from "hooks/useToggle";
 import { debounce } from "lodash";
 import { useAuth } from "contexts/auth-context";
 import Checkbox from "components/checkbox/Checkbox";
+import { globalStore } from "store/global-store";
+import shallow from "zustand/shallow";
 
 const CardManage = (props) => {
   const [filter, setFilter] = React.useState("");
@@ -107,9 +110,6 @@ const CardManage = (props) => {
         <table className="table">
           <thead>
             <tr>
-              {/* <th>
-                <Checkbox></Checkbox>
-              </th> */}
               <th>Title</th>
               <th>Filter</th>
               <th>Status</th>
@@ -177,6 +177,18 @@ const CardRow = ({ card }) => {
       toast.error("Delete card failed");
     }
   };
+  const { setIsShowReasonModal, setReason } = globalStore(
+    (state) => ({
+      setReason: state.setReason,
+      isShowReasonModal: state.isShowReasonModal,
+      setIsShowReasonModal: state.setIsShowReasonModal,
+    }),
+    shallow
+  );
+  const handleShowReason = (reason) => {
+    setIsShowReasonModal(true);
+    setReason(reason);
+  };
   return (
     <tr>
       {/* <td>
@@ -192,9 +204,20 @@ const CardRow = ({ card }) => {
       <td>
         {new Date(card.createdAt?.seconds * 1000).toLocaleDateString("vi-VI")}
       </td>
-      <td></td>
+      <td>
+        <div className="flex flex-col gap-1">
+          <p>{card.userFullname || "Admin"}</p>
+          <p className="text-sm text-slate-500">{card.userEmailAddress}</p>
+        </div>
+      </td>
       <td>
         <div className="flex items-center gap-x-5">
+          <ButtonAction
+            className="hover:text-slate-400 hover:border-slate-400text-slate-400"
+            onClick={() => handleShowReason(card.reason || "")}
+          >
+            <IconQuestion />
+          </ButtonAction>
           <Link href={`/manage/update-card?id=${card.id}`}>
             <a>
               <ButtonAction className="hover:text-blue-500 hover:border-blue-500">
@@ -202,6 +225,7 @@ const CardRow = ({ card }) => {
               </ButtonAction>
             </a>
           </Link>
+
           {userInfo?.role === userRole.ADMIN && (
             <ButtonAction
               className="hover:text-red-500 hover:border-red-500"

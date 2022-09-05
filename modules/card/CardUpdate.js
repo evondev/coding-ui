@@ -94,6 +94,15 @@ const CardUpdate = ({ id }) => {
             </FormGroup>
           </div>
         )}
+        <FormGroup>
+          <Label>Reject reason</Label>
+          <Input
+            name="reason"
+            onChange={onChange}
+            placeholder="Reject reason"
+            value={values.reason}
+          ></Input>
+        </FormGroup>
         <div className="flex items-center gap-x-5">
           <FormGroup>
             <Label>Title</Label>

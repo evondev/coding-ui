@@ -50,6 +50,7 @@ const CardAddNew = () => {
     try {
       addDoc(colRef, {
         ...values,
+        reason: "",
         status: cardStatus.PENDING,
         createdAt: serverTimestamp(),
         userId: userInfo?.uid,
