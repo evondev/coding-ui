@@ -12,7 +12,7 @@ const Toggle = ({ onChange = () => {}, on = false, name = "status" }) => {
       />
       <span
         className={`transition-all rounded-full w-[100px] p-2 inline-block h-12 ${
-          on ? "bg-blue-500" : "bg-slate-800"
+          on ? "bg-third" : "bg-slate-800"
         }`}
       >
         <span

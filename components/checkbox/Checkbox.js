@@ -6,7 +6,7 @@ const Checkbox = ({ checked = false, onClick = () => {} }) => {
     <label
       className={classNames(
         "flex items-center justify-center w-8 h-8 p-1 border rounded-lg border-slate-700",
-        checked ? "text-white bg-blue-500" : "text-transparent"
+        checked ? "text-white bg-third" : "text-transparent"
       )}
       onClick={onClick}
     >

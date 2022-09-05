@@ -102,7 +102,7 @@ const ManageUsers = () => {
       </div>
       {!isReachingEnd && (
         <Button
-          className="!block mx-auto my-10 w-[160px] bg-third button-effect"
+          className="!flex mx-auto my-10 w-[160px] !bg-transparent border border-third"
           onClick={handleLoadMore}
         >
           Load more

@@ -1,12 +1,11 @@
-import { auth } from "components/firebase/firebase-config";
-import ToggleDarkMode from "components/ToggleDarkMode";
-import { menus } from "constant/global-constant";
-import { signOut } from "firebase/auth";
+import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
 import classNames from "utils/classNames";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { signOut } from "firebase/auth";
+import { menus } from "constant/global-constant";
+import { auth } from "components/firebase/firebase-config";
 
 const Sidebar = () => {
   return (
@@ -14,20 +13,13 @@ const Sidebar = () => {
       aria-label="sidebar"
       className="relative hidden p-5 border-r border-slate-800 lg:block"
     >
-      <Link href="/">
-        <a className="flex items-center justify-start px-4 mt-5 mb-10 text-sm font-bold gap-x-3">
-          <img src="/logo.png" alt="codingui" className="max-w-[25px]" />
-          <span>CodingUI</span>
-        </a>
-      </Link>
+      <Logo />
       <ul className="flex flex-col gap-y-2">
         {menus.map((item, index) => (
-          <MenuItem key={item.link} menu={item}></MenuItem>
+          <MenuItem key={index} menu={item}></MenuItem>
         ))}
       </ul>
-      <div className="absolute bottom-0 flex items-center w-full pb-5 gap-x-2">
-        <ButtonLogout></ButtonLogout>
-      </div>
+      <ButtonLogout></ButtonLogout>
     </div>
   );
 };
@@ -54,13 +46,15 @@ function ButtonLogout() {
     </svg>
   );
   return (
-    <button
-      className="flex items-center px-4 py-3 bg-gray-800 rounded-lg gap-x-3 font-secondary"
-      onClick={handleSignOut}
-    >
-      <span className="w-5">{IconLogout}</span>
-      <span>Logout</span>
-    </button>
+    <div className="absolute bottom-0 flex items-center w-full pb-5 gap-x-2">
+      <button
+        className="flex items-center px-4 py-3 bg-gray-800 rounded-lg gap-x-3 font-secondary"
+        onClick={handleSignOut}
+      >
+        <span className="w-5">{IconLogout}</span>
+        <span>Logout</span>
+      </button>
+    </div>
   );
 }
 function MenuItem({ menu }) {
@@ -83,4 +77,14 @@ function MenuItem({ menu }) {
   );
 }
 
+function Logo({}) {
+  return (
+    <Link href="/">
+      <a className="flex items-center justify-start px-4 mt-5 mb-10 text-sm font-bold gap-x-3">
+        <img src="/logo.png" alt="codingui" className="max-w-[25px]" />
+        <span>CodingUI</span>
+      </a>
+    </Link>
+  );
+}
 export default Sidebar;
