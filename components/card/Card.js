@@ -50,7 +50,7 @@ const Card = (props) => {
     <>
       <div
         data-filter={filter}
-        className="relative flex flex-col p-5 transition-all border rounded border-slate-800 hover:border-slate-600"
+        className="relative flex flex-col p-5 transition-all border rounded border-slate-800 hover:border-slate-600 card"
       >
         <div className="flex items-center justify-between">
           <h4 className="relative z-10 flex items-center text-sm font-normal text-slate-500 gap-x-2">
