@@ -35,11 +35,8 @@ const CardUpdate = ({ id }) => {
       if (docSnap.exists()) {
         setValues({
           ...docSnap.data(),
-          htmlCode: pretty(docSnap.data().htmlCode),
-          cssCode: cssbeautify(docSnap.data().cssCode, {
-            indent: `  `,
-            autosemicolon: true,
-          }),
+          htmlCode: docSnap.data().htmlCode,
+          cssCode: docSnap.data().cssCode,
           id: docSnap.id,
         });
       }

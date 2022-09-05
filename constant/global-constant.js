@@ -54,3 +54,4 @@ export const userRole = {
   MOD: "MOD",
   ADMIN: "ADMIN",
 };
+export const DATA_PER_PAGE = 10;

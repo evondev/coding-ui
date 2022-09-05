@@ -5,7 +5,7 @@ import LabelStatus from "components/label/LabelStatus";
 import ButtonAction from "components/button/ButtonAction";
 import Button from "components/button/Button";
 import useFetchCards from "hooks/useFetchCards";
-import { cardStatus, userRole } from "constant/global-constant";
+import { cardStatus, DATA_PER_PAGE, userRole } from "constant/global-constant";
 import { IconEdit, IconTrash } from "components/icons";
 import { collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "components/firebase/firebase-config";
@@ -38,11 +38,11 @@ const CardManage = (props) => {
     setStatusText(item === cardStatus.APPROVED ? "Approved" : "Rejected");
     toggleStatus();
   };
-  const { cards } = useFetchCards({
+  const { cards, isLoading, handleLoadMore, isReachingEnd } = useFetchCards({
     status,
     name,
     filter,
-    count: 100,
+    count: DATA_PER_PAGE,
     isManage: true,
   });
   const resetSearch = () => {
@@ -129,6 +129,14 @@ const CardManage = (props) => {
           </tbody>
         </table>
       </div>
+      {!isReachingEnd && (
+        <Button
+          className="!block mx-auto my-10 w-[160px]"
+          onClick={handleLoadMore}
+        >
+          Load more
+        </Button>
+      )}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import Button from "components/button/Button";
 import ButtonAction from "components/button/ButtonAction";
 import Checkbox from "components/checkbox/Checkbox";
 import { db } from "components/firebase/firebase-config";
@@ -15,7 +16,7 @@ import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const { userInfo } = useAuth();
-  const { members } = useFetchMembers();
+  const { members, handleLoadMore, isReachingEnd } = useFetchMembers();
   return (
     <LayoutDashboard
       heading="Manage users"
@@ -41,6 +42,14 @@ const ManageUsers = () => {
           </tbody>
         </table>
       </div>
+      {!isReachingEnd && (
+        <Button
+          className="!block mx-auto my-10 w-[160px]"
+          onClick={handleLoadMore}
+        >
+          Load more
+        </Button>
+      )}
     </LayoutDashboard>
   );
 };

@@ -3,10 +3,12 @@ import { userRole } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
 import {
   collection,
+  getDocs,
   limit,
   onSnapshot,
   orderBy,
   query,
+  startAfter,
   where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -22,6 +24,9 @@ export default function useFetchCards({
   const { userInfo } = useAuth();
   const [loading, setLoading] = useState(true);
   const [cards, setCards] = useState([]);
+  const [lastDoc, setLastDoc] = useState();
+  const [total, setTotal] = useState(0);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -30,7 +35,7 @@ export default function useFetchCards({
         if (isManage && userInfo?.role === userRole.USER) {
           colRef = query(colRef, where("userId", "==", userInfo.uid));
         }
-        let queries = query(colRef, orderBy("createdAt", "desc"));
+        let queries = query(colRef, orderBy("createdAt", "desc"), limit(count));
         if (status)
           queries = query(queries, where("status", "==", status), limit(count));
         if (name)
@@ -43,13 +48,18 @@ export default function useFetchCards({
           );
         if (filter)
           queries = query(queries, where("filter", "==", filter), limit(count));
+        const documentSnapshots = await getDocs(queries);
+        const lastVisible =
+          documentSnapshots.docs[documentSnapshots.docs.length - 1];
         onSnapshot(queries, (querySnapshot) => {
+          setTotal(querySnapshot.size);
           const results = [];
           querySnapshot.forEach((doc) => {
             results.push({ id: doc.id, ...doc.data() });
           });
           setCards(results);
         });
+        setLastDoc(lastVisible);
       } catch (err) {
         console.log(err);
         toast.error(err?.message);
@@ -59,9 +69,69 @@ export default function useFetchCards({
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter, name, status]);
+  }, [filter, name, status, count]);
+  const handleLoadMore = async () => {
+    setLoading(true);
+    let colRef = collection(db, "cards");
+    if (isManage && userInfo?.role === userRole.USER) {
+      colRef = query(
+        colRef,
+        startAfter(lastDoc || 0),
+        where("userId", "==", userInfo.uid),
+        limit(count)
+      );
+    }
+    let queries = query(
+      colRef,
+      orderBy("createdAt", "desc"),
+      startAfter(lastDoc || 0),
+      limit(count)
+    );
+    if (status)
+      queries = query(
+        queries,
+        startAfter(lastDoc || 0),
+        where("status", "==", status),
+        limit(count)
+      );
+    if (name)
+      queries = query(
+        colRef,
+        where("title", ">=", name),
+        where("title", "<=", name + "utf8"),
+        orderBy("title", "desc"),
+        startAfter(lastDoc || 0),
+        limit(count)
+      );
+    if (filter)
+      queries = query(
+        queries,
+        startAfter(lastDoc || 0),
+        where("filter", "==", filter),
+        limit(count)
+      );
+
+    onSnapshot(queries, (snapshot) => {
+      let results = [];
+      snapshot.forEach((doc) => {
+        results.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+      setCards([...cards, ...results]);
+    });
+    const documentSnapshots = await getDocs(queries);
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    setLastDoc(lastVisible);
+    setLoading(false);
+  };
   return {
     cards,
     isLoading: loading,
+    lastDoc,
+    handleLoadMore,
+    isReachingEnd: total < cards.length,
   };
 }
