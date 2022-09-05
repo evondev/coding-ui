@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <ToastContainer
         bodyClassName="font-primary text-sm text-slate-500"
-        hideProgressBar
+        autoClose={1000}
       ></ToastContainer>
       <ReactModal
         isOpen={isShowCode}

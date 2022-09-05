@@ -25,6 +25,7 @@ export default function useFetchMembers(status = null, count = DATA_PER_PAGE) {
       const documentSnapshots = await getDocs(colRef);
       const lastVisible =
         documentSnapshots.docs[documentSnapshots.docs.length - 1];
+      setLastDoc(lastVisible);
       onSnapshot(colRef, (querySnapshot) => {
         setTotal(querySnapshot.size);
         const results = [];
@@ -33,7 +34,6 @@ export default function useFetchMembers(status = null, count = DATA_PER_PAGE) {
         });
         setMembers(results);
       });
-      setLastDoc(lastVisible);
     }
     fetchData();
   }, [status, count]);
@@ -49,6 +49,10 @@ export default function useFetchMembers(status = null, count = DATA_PER_PAGE) {
         limit(count)
       );
     }
+    const documentSnapshots = await getDocs(colRef);
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    setLastDoc(lastVisible);
     onSnapshot(colRef, (snapshot) => {
       let results = [];
       snapshot.forEach((doc) => {
@@ -59,10 +63,6 @@ export default function useFetchMembers(status = null, count = DATA_PER_PAGE) {
       });
       setMembers([...members, ...results]);
     });
-    const documentSnapshots = await getDocs(colRef);
-    const lastVisible =
-      documentSnapshots.docs[documentSnapshots.docs.length - 1];
-    setLastDoc(lastVisible);
   };
   return {
     members,

@@ -44,7 +44,7 @@ const ManageUsers = () => {
       </div>
       {!isReachingEnd && (
         <Button
-          className="!block mx-auto my-10 w-[160px]"
+          className="!block mx-auto my-10 w-[160px] bg-third"
           onClick={handleLoadMore}
         >
           Load more

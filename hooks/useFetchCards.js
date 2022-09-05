@@ -51,8 +51,10 @@ export default function useFetchCards({
         const documentSnapshots = await getDocs(queries);
         const lastVisible =
           documentSnapshots.docs[documentSnapshots.docs.length - 1];
-        onSnapshot(queries, (querySnapshot) => {
+        onSnapshot(colRef, (querySnapshot) => {
           setTotal(querySnapshot.size);
+        });
+        onSnapshot(queries, (querySnapshot) => {
           const results = [];
           querySnapshot.forEach((doc) => {
             results.push({ id: doc.id, ...doc.data() });
@@ -74,12 +76,7 @@ export default function useFetchCards({
     setLoading(true);
     let colRef = collection(db, "cards");
     if (isManage && userInfo?.role === userRole.USER) {
-      colRef = query(
-        colRef,
-        startAfter(lastDoc || 0),
-        where("userId", "==", userInfo.uid),
-        limit(count)
-      );
+      colRef = query(colRef, where("userId", "==", userInfo.uid));
     }
     let queries = query(
       colRef,
@@ -110,7 +107,11 @@ export default function useFetchCards({
         where("filter", "==", filter),
         limit(count)
       );
-
+    const documentSnapshots = await getDocs(queries);
+    const lastVisible =
+      documentSnapshots.docs[documentSnapshots.docs.length - 1];
+    setLastDoc(lastVisible);
+    setLoading(false);
     onSnapshot(queries, (snapshot) => {
       let results = [];
       snapshot.forEach((doc) => {
@@ -121,17 +122,13 @@ export default function useFetchCards({
       });
       setCards([...cards, ...results]);
     });
-    const documentSnapshots = await getDocs(queries);
-    const lastVisible =
-      documentSnapshots.docs[documentSnapshots.docs.length - 1];
-    setLastDoc(lastVisible);
-    setLoading(false);
   };
   return {
+    total,
     cards,
     isLoading: loading,
     lastDoc,
     handleLoadMore,
-    isReachingEnd: total < cards.length,
+    isReachingEnd: total < cards.length || total < count,
   };
 }

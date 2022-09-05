@@ -38,7 +38,7 @@ const CardManage = (props) => {
     setStatusText(item === cardStatus.APPROVED ? "Approved" : "Rejected");
     toggleStatus();
   };
-  const { cards, isLoading, handleLoadMore, isReachingEnd } = useFetchCards({
+  const { cards, handleLoadMore, isReachingEnd, total } = useFetchCards({
     status,
     name,
     filter,
@@ -61,7 +61,7 @@ const CardManage = (props) => {
         <div className="w-full lg:w-[200px]">
           <Input
             name="filter"
-            placeholder="Filter by title"
+            placeholder="Search by title"
             onChange={handleFilterByTitle}
           ></Input>
         </div>
@@ -101,6 +101,7 @@ const CardManage = (props) => {
           Clear filter
         </Button>
       </div>
+      <div className="mb-10">Found: {total}</div>
       <div className="w-full overflow-x-auto">
         <table className="table">
           <thead>
@@ -131,7 +132,7 @@ const CardManage = (props) => {
       </div>
       {!isReachingEnd && (
         <Button
-          className="!block mx-auto my-10 w-[160px]"
+          className="!block mx-auto my-10 w-[160px] bg-third"
           onClick={handleLoadMore}
         >
           Load more
