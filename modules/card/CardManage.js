@@ -107,9 +107,9 @@ const CardManage = (props) => {
         <table className="table">
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <Checkbox></Checkbox>
-              </th>
+              </th> */}
               <th>Title</th>
               <th>Filter</th>
               <th>Status</th>
@@ -179,9 +179,9 @@ const CardRow = ({ card }) => {
   };
   return (
     <tr>
-      <td>
+      {/* <td>
         <Checkbox></Checkbox>
-      </td>
+      </td> */}
       <td>
         <Link href={`/manage/update-card?id=${card.id}`}>
           <a className="text-white">{card.title}</a>

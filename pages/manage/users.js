@@ -4,7 +4,7 @@ import Checkbox from "components/checkbox/Checkbox";
 import Dropdown from "components/dropdown/Dropdown";
 import DropdownItem from "components/dropdown/DropdownItem";
 import { db } from "components/firebase/firebase-config";
-import { IconEdit, IconTrash } from "components/icons";
+import { IconTrash } from "components/icons";
 import Input from "components/input/Input";
 import LabelStatus from "components/label/LabelStatus";
 import LayoutDashboard from "components/layout/LayoutDashboard";
@@ -14,7 +14,6 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import useFetchMembers from "hooks/useFetchMembers";
 import useToggle from "hooks/useToggle";
 import { debounce } from "lodash";
-import Link from "next/link";
 import React from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -85,7 +84,7 @@ const ManageUsers = () => {
         <table className="w-full">
           <thead>
             <tr>
-              <th>&nbsp;</th>
+              {/* <th>&nbsp;</th> */}
               <th>Full name</th>
               <th>Email</th>
               <th>Status</th>
@@ -178,9 +177,9 @@ function UserItem({ member }) {
   };
   return (
     <tr>
-      <td>
+      {/* <td>
         <Checkbox></Checkbox>
-      </td>
+      </td> */}
       <td className="font-secondary">{member?.fullname || "Anonymous"}</td>
       <td>{member?.email}</td>
       <td>{renderStatus(member.status)}</td>

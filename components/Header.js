@@ -2,6 +2,7 @@ import { useAuth } from "contexts/auth-context";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import Avatar from "./image/Avatar";
 
 const Header = () => {
   const { userInfo } = useAuth();
@@ -9,7 +10,7 @@ const Header = () => {
     <div className="py-5 border-b l-container border-slate-800">
       <div className="flex items-center justify-between">
         <Link href="/">
-          <a className="inline-flex items-center font-bold  gap-x-3">
+          <a className="inline-flex items-center font-bold gap-x-3">
             <div className="relative">
               <Image
                 src="/logo.png"
@@ -24,11 +25,11 @@ const Header = () => {
         {userInfo?.email && (
           <Link href="/manage/cards">
             <a className="flex items-center gap-x-3">
-              <div className="object-cover w-10 h-10 bg-white rounded-full" />
+              <Avatar className="w-10 h-10 text-xl"></Avatar>
               <p>
                 <span>Hello,</span>
                 <strong className="ml-1 font-bold text-transparent font-secondary bg-clip-text bg-gradient-primary">
-                  {userInfo?.fullname || "user"}
+                  {userInfo?.username || userInfo?.fullname || "user"}
                 </strong>
               </p>
             </a>

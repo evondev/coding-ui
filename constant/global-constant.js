@@ -30,11 +30,6 @@ export const menus = [
     icon: <IconFilters />,
     link: "/manage/filters",
   },
-  {
-    title: "Profile",
-    icon: <IconUsers />,
-    link: "/profile",
-  },
 ];
 export const cardStatus = {
   APPROVED: 1,
