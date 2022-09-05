@@ -63,6 +63,7 @@ const CardManage = (props) => {
             name="filter"
             placeholder="Search by title"
             onChange={handleFilterByTitle}
+            className="h-[55px]"
           ></Input>
         </div>
         <div className="w-full lg:w-[200px]">
@@ -132,7 +133,7 @@ const CardManage = (props) => {
       </div>
       {!isReachingEnd && (
         <Button
-          className="!block mx-auto my-10 w-[160px] bg-third"
+          className="!block mx-auto my-10 w-[160px] bg-third button-effect"
           onClick={handleLoadMore}
         >
           Load more

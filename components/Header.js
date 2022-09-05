@@ -1,4 +1,5 @@
 import { useAuth } from "contexts/auth-context";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -8,12 +9,15 @@ const Header = () => {
     <div className="py-5 border-b l-container border-slate-800">
       <div className="flex items-center justify-between">
         <Link href="/">
-          <a className="inline-flex items-center font-bold gap-x-3">
-            <img
-              src="/logo.png"
-              alt="coding-ui"
-              className="mx-auto max-w-[20px]"
-            />
+          <a className="inline-flex items-center font-bold  gap-x-3">
+            <div className="relative">
+              <Image
+                src="/logo.png"
+                alt="codingUI"
+                width={20}
+                height={22}
+              ></Image>
+            </div>
             <span>CodingUI</span>
           </a>
         </Link>

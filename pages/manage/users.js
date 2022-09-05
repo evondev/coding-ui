@@ -1,14 +1,19 @@
 import Button from "components/button/Button";
 import ButtonAction from "components/button/ButtonAction";
 import Checkbox from "components/checkbox/Checkbox";
+import Dropdown from "components/dropdown/Dropdown";
+import DropdownItem from "components/dropdown/DropdownItem";
 import { db } from "components/firebase/firebase-config";
 import { IconEdit, IconTrash } from "components/icons";
+import Input from "components/input/Input";
 import LabelStatus from "components/label/LabelStatus";
 import LayoutDashboard from "components/layout/LayoutDashboard";
-import { userRole, userStatus } from "constant/global-constant";
+import { DATA_PER_PAGE, userRole, userStatus } from "constant/global-constant";
 import { useAuth } from "contexts/auth-context";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import useFetchMembers from "hooks/useFetchMembers";
+import useToggle from "hooks/useToggle";
+import { debounce } from "lodash";
 import Link from "next/link";
 import React from "react";
 import { toast } from "react-toastify";
@@ -16,12 +21,66 @@ import Swal from "sweetalert2";
 
 const ManageUsers = () => {
   const { userInfo } = useAuth();
-  const { members, handleLoadMore, isReachingEnd } = useFetchMembers();
+  const [email, setEmail] = React.useState("");
+  const [status, setStatus] = React.useState(null);
+  const [statusText, setStatusText] = React.useState("");
+  const { show: showStatus, toggle: toggleStatus } = useToggle();
+  const { members, handleLoadMore, isReachingEnd, total } = useFetchMembers({
+    status,
+    email: email,
+    count: DATA_PER_PAGE,
+  });
+  const resetSearch = () => {
+    setEmail("");
+    setStatus(null);
+    setStatusText("");
+  };
+  const handleFilterByEmail = debounce((e) => {
+    setEmail(e.target.value);
+  }, 500);
+  const handleClickStatus = (item) => {
+    setStatus(item);
+    setStatusText(item === userStatus.ACTIVE ? "Active" : "Inactive");
+    toggleStatus();
+  };
   return (
     <LayoutDashboard
       heading="Manage users"
       hasPermission={userInfo?.role === userRole.ADMIN}
     >
+      <div className="grid flex-wrap grid-cols-1 gap-5 mb-10 lg:flex lg:justify-end">
+        <div className="w-full lg:w-[200px]">
+          <Input
+            name="filter"
+            placeholder="Search by email"
+            onChange={handleFilterByEmail}
+            className="h-[55px]"
+          ></Input>
+        </div>
+        <div className="w-full lg:w-[200px]">
+          <Dropdown
+            placeholder={statusText || "Status"}
+            show={showStatus}
+            onClick={toggleStatus}
+          >
+            <DropdownItem onClick={() => handleClickStatus(userStatus.ACTIVE)}>
+              Active
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => handleClickStatus(userStatus.INACTIVE)}
+            >
+              Inactive
+            </DropdownItem>
+          </Dropdown>
+        </div>
+        <Button
+          onClick={resetSearch}
+          className="w-full h-full p-2 lg:w-auto !bg-slate-700 button-effect"
+        >
+          Clear filter
+        </Button>
+      </div>
+      <div className="mb-10">Found: {total}</div>
       <div className="table overflow-x-auto">
         <table className="w-full">
           <thead>
@@ -44,7 +103,7 @@ const ManageUsers = () => {
       </div>
       {!isReachingEnd && (
         <Button
-          className="!block mx-auto my-10 w-[160px] bg-third"
+          className="!block mx-auto my-10 w-[160px] bg-third button-effect"
           onClick={handleLoadMore}
         >
           Load more
