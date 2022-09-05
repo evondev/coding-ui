@@ -40,7 +40,7 @@ const CreateAccountPage = () => {
         fullname: values.name,
         email: values.email,
         password: values.password,
-        status: userStatus.INACTIVE,
+        status: userStatus.ACTIVE,
         role: userRole.USER,
         createdAt: serverTimestamp(),
       });
