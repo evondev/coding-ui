@@ -34,17 +34,18 @@ const CreateAccountPage = () => {
       return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
-      await setDoc(doc(db, "users", auth.currentUser.uid), {
-        userId: auth.currentUser.uid,
-        fullname: values.name,
-        email: values.email,
-        password: values.password,
-        status: userStatus.ACTIVE,
-        role: userRole.USER,
-        createdAt: serverTimestamp(),
-      });
-      toast.success("Create account successfully");
+      toast.warning("Registration is temporarily disabled");
+      // await createUserWithEmailAndPassword(auth, values.email, values.password);
+      // await setDoc(doc(db, "users", auth.currentUser.uid), {
+      //   userId: auth.currentUser.uid,
+      //   fullname: values.name,
+      //   email: values.email,
+      //   password: values.password,
+      //   status: userStatus.ACTIVE,
+      //   role: userRole.USER,
+      //   createdAt: serverTimestamp(),
+      // });
+      // toast.success("Create account successfully");
     } catch (error) {
       console.log(error);
       toast.error(error.message);

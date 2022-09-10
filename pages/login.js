@@ -43,7 +43,7 @@ const LoginPage = () => {
   return (
     <LayoutMain title="Login Page" hideBanner>
       <div className="max-w-2xl py-10 mx-auto rounded-lg border-slate-800">
-        <form onSubmit={handleLogin} autoComplete="off">
+        <form onSubmit={handleLogin}>
           <FormGroup>
             <Label>Email</Label>
             <Input
