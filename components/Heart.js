@@ -19,7 +19,6 @@ const Heart = () => {
     getLikes();
   }, []);
   const handleClickHeart = () => {
-    if (liked) return;
     if (likes > 100_000_000) {
       toast.warn("The database have reached the maximum likes");
       return;
@@ -27,10 +26,10 @@ const Heart = () => {
     setLiked(true);
     setLikes((likes) => likes + 1);
     const colRef = doc(db, "hearts", "count");
-    updateDoc(colRef, { count: liked ? likes + 1 : likes }, { merge: true });
-    // setTimeout(() => {
-    //   setLiked(false);
-    // }, 500);
+    updateDoc(colRef, { count: likes + 1 }, { merge: true });
+    setTimeout(() => {
+      setLiked(false);
+    }, 500);
   };
   return (
     <div className="fixed z-50 flex flex-col items-center select-none gap-y-2 bottom-5 right-5">
