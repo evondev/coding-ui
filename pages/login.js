@@ -34,7 +34,7 @@ const LoginPage = () => {
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast.success("Login successful");
-      router.push("/manage/cards");
+      router.push("/");
     } catch (error) {
       console.log(error);
       toast.error(error.message);
