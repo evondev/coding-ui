@@ -19,7 +19,7 @@
 
 - Sử dụng ReactJS và NextJS
 - `styled-components` dùng để xử lý styles cho từng component riêng biệt
-- `react-html-parser` dùng để parse HTML ra giao diện
+- `html-react-parser` dùng để parse HTML ra giao diện
 - `pretty` dùng để format code HTML hiển thị cho đẹp
 - `cssbeautify` dùng để format code CSS
 - `react-syntax-highlighter` dùng để hiển thị cú pháp HTML CSS có màu cho đẹp và dễ nhìn

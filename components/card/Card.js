@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import styled from "styled-components";
-import parse from "react-html-parser";
+import parse from "html-react-parser";
 import copyToClipBoard from "../../utils/copyToClipboard";
 import pretty from "pretty";
 import cssbeautify from "cssbeautify";
